@@ -1,0 +1,16 @@
+shader_type canvas_item;
+
+uniform float closenes;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR = vec4(UV.x * closenes, UV.y * closenes, (1.0 - UV.x * 0.5 - UV.y * 0.5) * closenes, 1);
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}

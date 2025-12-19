@@ -1,0 +1,335 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpckjdnjuocul"]
+
+[ext_resource type="Shader" uid="uid://lq1heo5n074k" path="res://shaders/intro.gdshader" id="1_ioskq"]
+
+[sub_resource type="Animation" id="Animation_sjfbp"]
+resource_name = "intro"
+length = 20.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro 1/ColorRect/Label:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.175, -0.16666667, 100, -0.16666667, -16.666668, 0, 0),
+"times": PackedFloat32Array(0, 5.0666666)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Intro 1/ColorRect/Label2:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.32000002, -0.16666667, 0, 0, 0, -0.25, 0, 0.25, 0, 1, -0.32000002, -0.16666667, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(5.07, 7.5333333, 10, 12.533334, 15)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Intro 1/ColorRect/Label2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-6.2831855, -0.25, 0, 0.25, 0, 6.2831855, -0.32166666, -2.0943954, 0, 0, -6.283, -0.32166666, -2.0943954, 0, 0),
+"times": PackedFloat32Array(5.07, 10, 15)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Intro 1:visible")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 15.000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Intro 2:visible")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 15.000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Intro 2/ColorRect:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.7749999, -0.05000019, -0.085085206, 0.038888615, 0.06617666, 0.9075712, -0.33333334, -0.15126187, 0, 0, 1.2007865, -0.083333336, -0.048869215, 0, 0),
+"times": PackedFloat32Array(18, 18.300001, 18.866667, 19.366667)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Intro 2/ColorRect:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.33333334, 0, 0, 0, 100, -0.083333336, -16.666668, 0, 0),
+"times": PackedFloat32Array(18, 18.866667, 19.366667)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Intro 2/ColorRect:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.33333334, 0, 0, 0, 400, -0.083333336, -66.66667, 0, 0),
+"times": PackedFloat32Array(18, 18.866667, 19.366667)
+}
+
+[sub_resource type="Animation" id="Animation_ioskq"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro 1/ColorRect/Label:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Intro 1/ColorRect/Label2:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Intro 1/ColorRect/Label2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-6.2831855, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Intro 1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Intro 2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Intro 2/ColorRect:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Intro 2/ColorRect:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Intro 2/ColorRect:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yjqpq"]
+_data = {
+&"RESET": SubResource("Animation_ioskq"),
+&"intro": SubResource("Animation_sjfbp")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjqpq"]
+font_size = 76
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bx60"]
+shader = ExtResource("1_ioskq")
+shader_parameter/closenes = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ioskq"]
+font_size = 26
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Intro" type="AnimationPlayer" parent="."]
+deterministic = true
+libraries = {
+&"": SubResource("AnimationLibrary_yjqpq")
+}
+
+[node name="Intro 1" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Intro 1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Intro 1/ColorRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "All systems operational..
+Core started..
+Wellcome to your life ||\\\\--//||"
+
+[node name="Label2" type="Label" parent="Intro 1/ColorRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 475.0
+offset_top = 261.0
+offset_right = 602.0
+offset_bottom = 284.0
+rotation = -6.2831855
+pivot_offset = Vector2(63.5, 11.5)
+text = "Please waiiittt...."
+
+[node name="Intro 2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Intro 2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.0004272461
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Label" type="Label" parent="Intro 2/ColorRect"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 35.0
+offset_right = 198.0
+offset_bottom = 84.0
+text = "Yeah u no more
+X-X"
+label_settings = SubResource("LabelSettings_yjqpq")
+visible_characters = 100
+visible_ratio = 1.369863
+
+[node name="Label2" type="Label" parent="Intro 2/ColorRect"]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 261.0
+offset_right = 602.0
+offset_bottom = 284.0
+rotation = -6.283
+pivot_offset = Vector2(63.5, 11.5)
+text = "OOPs u dead"
+
+[node name="Intro 3" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="Intro 3"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Intro 3/ColorRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 268.0
+offset_right = 123.0
+offset_bottom = 341.0
+
+[node name="ColorRect" type="ColorRect" parent="Intro 3/ColorRect"]
+material = SubResource("ShaderMaterial_4bx60")
+layout_mode = 0
+offset_left = 492.0
+offset_top = 188.00002
+offset_right = 592.0
+offset_bottom = 288.0
+rotation = 0.3874631
+
+[node name="Label" type="Label" parent="Intro 3/ColorRect"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 96.0
+offset_right = 595.0
+offset_bottom = 210.0
+rotation = -0.12915437
+text = "Please excuse this.. 
+the game is still beeing worked on..
+Meanwhile please pick color of your liking :))"
+label_settings = SubResource("LabelSettings_ioskq")
+
+[node name="Click me" type="Label" parent="Intro 3/ColorRect/Label"]
+layout_mode = 0
+offset_left = 70.52364
+offset_top = 140.25127
+offset_right = 624.5236
+offset_bottom = 254.25127
+rotation = -0.12915437
+text = "click me
+<--"
+label_settings = SubResource("LabelSettings_ioskq")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2csv0bacl54s"]
+
+[ext_resource type="Shader" uid="uid://lq1heo5n074k" path="res://shaders/intro.gdshader" id="1_pke8b"]
+[ext_resource type="Script" uid="uid://bmuyqlmac32md" path="res://scripts/process/color_rect.gd" id="2_letgk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bx60"]
+resource_local_to_scene = true
+shader = ExtResource("1_pke8b")
+shader_parameter/closenes = 2.0
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_4bx60")
+offset_right = 1.0
+offset_bottom = 1.0
+pivot_offset = Vector2(50, 50)
+script = ExtResource("2_letgk")

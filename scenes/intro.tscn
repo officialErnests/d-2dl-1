@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=10 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
+[ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
+[ext_resource type="Script" uid="uid://bidak4saascfr" path="res://scripts/main.gd" id="2_i2l1n"]
 [ext_resource type="Script" uid="uid://dobon3t2nwhdp" path="res://scripts/ready/color_rect.gd" id="2_yjqpq"]
 
 [sub_resource type="Animation" id="Animation_ioskq"]
@@ -319,21 +321,18 @@ offset_right = 360.0
 offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextEdit" type="TextEdit" parent="Game/Main"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console")]
+script = ExtResource("2_i2l1n")
+console = NodePath("../Console")
+
+[node name="Console" type="RichTextLabel" parent="Game/Main"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Initilising systems...
-ALL SYSTEMS ACTIVE
-And rember.. DON'T BLOW UP XXDD"
-wrap_mode = 1
+offset_right = 350.0
+offset_bottom = 350.0
+bbcode_enabled = true
+script = ExtResource("2_4bx60")
 
 [node name="Terminal_animator" type="AnimationPlayer" parent="Game/Main"]
 
@@ -348,13 +347,13 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_yjqpq")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Game/Main"]
+[node name="Minigames" type="SubViewportContainer" parent="Game/Main"]
 visible = false
 layout_mode = 0
 offset_right = 360.0
 offset_bottom = 360.0
 
-[node name="SubViewport" type="SubViewport" parent="Game/Main/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Game/Main/Minigames"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(360, 360)

@@ -1,7 +1,9 @@
 extends Node
 
 var diologue = [
-	"unfinished n0o0b090lv-o-os 2025@tm(soon)\n(Use HELP)\n",
+	#0 - intro
+	"unfinished n0o0b090lv-o-os 2025@tm(soon)\n(Use HELP)\n", 
+	#1 - help
 	"Commandiessss ;DD
 	\tx__--// DEFAULTS \\\\--__x
 	\t\tHELP\t\t\t\tDISPLAYS ALL THE COMMANDS
@@ -16,9 +18,22 @@ var diologue = [
 	\t\tAPP\t\t\t\t\tOPENS DOWNLOADED APP
 	\t\tDELETE\t\t\tDELETES APP
 	\t\tDOWN\t\t\tDOWNLOADS NEWEST APP\n",
+	#2 - exit
 	"TF YOU THINK YOU GOING XD\n",
+	#3 - exit
 	"NUH UH XD\n",
+	#4 - exit
 	"LOL NO\n",
+	#5 - task help
+	"Tasker Commandiessss ;DD
+	\tx__--// DEFAULTS \\\\--__x
+	\t\tHELP\t\t\t\tDISPLAYS ALL THE COMMANDS
+	\t\tENTER\t\t\t\tCLEARS COMMAND
+	\t\tCLEAR\t\t\t\tCLEARS COMMAND FR FR
+
+	\tx__--// TASK-ER \\\\--__x
+	\t\tEXIT\t\t\t\tEXITS TASKER
+	\t\tREPEAT\t\t\t\tREPEATS GIVEN TASK\n",
 ]
 
 var emails = [
@@ -38,21 +53,27 @@ var emails = [
 	like.. i have no idea how to touch arrows..
 	I just code i can't play.. PLS PLS PLS HELP
 	
-	~ Cool programmer"
+	+_ Cool programmer _+"
 ]
 
 var tasks = [
 	{
-		"Name": "C0NGR4TS 0n 0p3n1ng th1s :DD",
-		"Requim": [
+		"Name": "C0NGR4T5 0n 0p3n1ng th15 :DD\n",
+		"Requims": [
 			{
-				"Text": "Do you sell your spul to this corp"
+				"Text": "D0 y0u 53ll y0ur UNG0DLY 50ULD t0 th15 noob.corp.c00l",
+				"Prompt": "Y - y35 || n0 - N\n",
+				"Expected": "Y",
+				"NoNo": "N"
 			}
-		]
+		],
+		"Fail": "00P5135 wr0ng 4n5w3r5, l0lz135
+		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*",
+		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D"
 	}
 ]
 
-func getTask(p_index: int) -> String:
+func getTask(p_index: int) -> Dictionary:
 	return tasks[p_index]
 
 func getDiologue(p_index: int) -> String:

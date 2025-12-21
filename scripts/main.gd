@@ -2,13 +2,16 @@ extends Node
 
 @export var console: Control
 
-var can_write = false
+var write_enabled = false
+var write_locked = false
 var previous_cahrecter = ""
+var task_mode = false
+var task_curent
+var task_requim_index = 0
 
 func start() -> void:
 	diologue(0)
 	console.done.connect(stopWriting)
-
 
 func _process(delta):
 	var curent_text = detectKeyboard()
@@ -18,41 +21,77 @@ func _process(delta):
 	checkSpecial()
 
 func write(p_string: String) -> void:
-	if not can_write: return
+	if not write_enabled: return
 	console.addCharecter(p_string)
 
 func stopWriting() -> void:
-	newLine()
+	if write_locked:
+		taskWrite()
+	else:
+		newLine()
 
 func newLine() -> void:
-	console.addCharecter("Noob->> ")
-	can_write = true
+	if task_mode:
+		console.addCharecter("Noob-o-task->> ")
+	else:
+		console.addCharecter("Noob->> ")
+	write_enabled = true
 	
 func checkSpecial() -> void:
-	match console.getLast(0):
-		"EXIT":
-			console.addNewLine()
-			diologue(randi_range(2,4))
-		"ENTER":
-			console.addNewLine()
-			newLine()
-		"HELP":
-			console.addNewLine()
-			diologue(1)
-		"CLEAR":
-			console.clearText()
-			newLine()
-		"EMAIL":
-			console.addNewLine()
-			email(0)
-		"TASKS":
-			console.addNewLine()
-			email(0)
-		_:
-			return
+	if task_mode:
+		match console.getLast(0):
+			"HELP":
+				console.addNewLine()
+				diologue(5)
+			"ENTER":
+				console.addNewLine()
+				newLine()
+			"CLEAR":
+				console.clearText()
+				newLine()
+			"EXIT":
+				pass
+			"REPEAT":
+				console.addNewLine()
+				taskWrite()
+			_:
+				return
+	else:
+		match console.getLast(0):
+			"EXIT":
+				console.addNewLine()
+				diologue(randi_range(2,4))
+			"ENTER":
+				console.addNewLine()
+				newLine()
+			"HELP":
+				console.addNewLine()
+				diologue(1)
+			"CLEAR":
+				console.clearText()
+				newLine()
+			"EMAIL":
+				console.addNewLine()
+				email(0)
+			"TASK":
+				console.addNewLine()
+				task(0)
+			_:
+				return
 
 func task(p_index) -> void:
-	var curent_task = Diologue.getTask()
+	task_curent = Diologue.getTask(0)
+	task_mode = true
+	write_enabled = false
+	write_locked = true
+	console.addNewLine()
+	task_requim_index = 0
+	console.addText("--==|| Task mode ,,--.. EXIT [to] EXIT ||==--\n"+task_curent["Name"])
+
+func taskWrite() -> void:
+	write_locked = false
+	console.addText(task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
+
 
 func diologue(p_index: int) -> void:
 	console.addText(Diologue.getDiologue(p_index))

@@ -7,7 +7,7 @@ void vertex() {
 }
 
 void fragment() {
-	COLOR = vec4(1, 1, 1, closenes);
+	COLOR = vec4(1, 0, 0, closenes);
 }
 
 //void light() {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=12 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
 [ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
@@ -97,6 +97,17 @@ tracks/7/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Game/Main/GameManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_sjfbp"]
 resource_name = "intro"
@@ -141,7 +152,7 @@ tracks/3/path = NodePath("Intro 1:visible")
 tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 15.000001),
+"times": PackedFloat32Array(0, 13.833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -153,7 +164,7 @@ tracks/4/path = NodePath("Intro 2:visible")
 tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 15.000001),
+"times": PackedFloat32Array(0, 13.833333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -165,9 +176,9 @@ tracks/5/path = NodePath("Intro 2/ColorRect:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 2, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.7749999, -0.05000019, -0.085085206, 0.038888615, 0.06617666, 0.9075712, -0.33333334, -0.15126187, 0, 0, 1.2007865, -0.083333336, -0.048869215, 0, 0),
-"times": PackedFloat32Array(18, 18.300001, 18.866667, 19.366667)
+"times": PackedFloat32Array(15, 15.300001, 15.866667, 16.366667)
 }
 tracks/6/type = "bezier"
 tracks/6/imported = false
@@ -176,9 +187,9 @@ tracks/6/path = NodePath("Intro 2/ColorRect:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.33333334, 0, 0, 0, 100, -0.083333336, -16.666668, 0, 0),
-"times": PackedFloat32Array(18, 18.866667, 19.366667)
+"times": PackedFloat32Array(15, 15.866667, 16.366667)
 }
 tracks/7/type = "bezier"
 tracks/7/imported = false
@@ -187,9 +198,23 @@ tracks/7/path = NodePath("Intro 2/ColorRect:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 0, 2),
+"handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.33333334, 0, 0, 0, 400, -0.083333336, -66.66667, 0, 0),
-"times": PackedFloat32Array(18, 18.866667, 19.366667)
+"times": PackedFloat32Array(15, 15.866667, 16.366667)
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Game/Main/GameManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(15.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_yjqpq"]
@@ -218,6 +243,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game/Main/GameManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yjqpq"]
 _data = {
@@ -228,6 +267,10 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_yjqpq"]
 font_size = 76
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wfs7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i2l1n"]
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -280,7 +323,7 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 0.0004272461
+offset_bottom = 0.00036621094
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 1, 1)
@@ -331,10 +374,15 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 350.0
 offset_bottom = 350.0
+theme_override_colors/default_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wfs7u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i2l1n")
 bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+scroll_following_visible_characters = true
 script = ExtResource("2_4bx60")
-
-[node name="Terminal_animator" type="AnimationPlayer" parent="Game/Main"]
 
 [node name="Particles" type="Control" parent="Game/Main"]
 clip_contents = true

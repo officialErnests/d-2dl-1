@@ -5,6 +5,10 @@ extends Node
 var can_write = false
 var previous_cahrecter = ""
 
+func start() -> void:
+	diologue(0)
+	console.done.connect(stopWriting)
+
 
 func _process(delta):
 	var curent_text = detectKeyboard()
@@ -14,17 +18,52 @@ func _process(delta):
 	checkSpecial()
 
 func write(p_string: String) -> void:
-	if can_write: return
+	if not can_write: return
 	console.addCharecter(p_string)
 
+func stopWriting() -> void:
+	newLine()
+
+func newLine() -> void:
+	console.addCharecter("Noob->> ")
+	can_write = true
+	
 func checkSpecial() -> void:
-	print(console.getLast(0))
+	match console.getLast(0):
+		"EXIT":
+			console.addNewLine()
+			diologue(randi_range(2,4))
+		"ENTER":
+			console.addNewLine()
+			newLine()
+		"HELP":
+			console.addNewLine()
+			diologue(1)
+		"CLEAR":
+			console.clearText()
+			newLine()
+		"EMAIL":
+			console.addNewLine()
+			email(0)
+		"TASKS":
+			console.addNewLine()
+			email(0)
+		_:
+			return
+
+func task(p_index) -> void:
+	var curent_task = Diologue.getTask()
+
+func diologue(p_index: int) -> void:
+	console.addText(Diologue.getDiologue(p_index))
+
+func email(p_index: int) -> void:
+	console.addText(Diologue.getEmail(p_index))
 
 func detectKeyboard() -> String:
 	# others
 	if Input.is_key_pressed(KEY_SPACE): return " "
-	if Input.is_key_pressed(KEY_ENTER): return " --ENTER"
-	if Input.is_key_pressed(KEY_MINUS): return "-"
+	if Input.is_key_pressed(KEY_ENTER): return " ENTER"
 	
 	# keyboard
 	if Input.is_key_pressed(KEY_Q): return "Q"

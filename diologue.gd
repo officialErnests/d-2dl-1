@@ -1,0 +1,62 @@
+extends Node
+
+var diologue = [
+	"unfinished n0o0b090lv-o-os 2025@tm(soon)\n(Use HELP)\n",
+	"Commandiessss ;DD
+	\tx__--// DEFAULTS \\\\--__x
+	\t\tHELP\t\t\t\tDISPLAYS ALL THE COMMANDS
+	\t\tENTER\t\t\t\tCLEARS COMMAND
+	\t\tCLEAR\t\t\t\tCLEARS COMMAND FR FR
+
+	\tx__--// JOB \\\\--__x
+	\t\tEMAIL\t\t\t\tCHECK YOUR EMAIL
+	\t\tTASKS\t\t\t\tCHECK YOUR TASKS
+
+	\tx__--// APP \\\\--__x
+	\t\tAPP\t\t\t\t\tOPENS DOWNLOADED APP
+	\t\tDELETE\t\t\tDELETES APP
+	\t\tDOWN\t\t\tDOWNLOADS NEWEST APP\n",
+	"TF YOU THINK YOU GOING XD\n",
+	"NUH UH XD\n",
+	"LOL NO\n",
+]
+
+var emails = [
+	"\tH3ll0, x-[R3DACT3D]-x
+
+	50 45 y0u c4n 53 w3 h4v3 m41l3d y0u 4 p1p3b0mb.. 
+	4nd 1t 15 0n c00ld0wn 50 y0u b3tt3r 5t4rt w0rk1ng XPP
+	1t 15 51mpl3, y0u d0 w0rk 4nd y0u d0n't bl00w up
+	
+	R3mb3r, h4v3 fun w0rk1ng f0-r noob.corp.c00l
+
+	[-] - F0r n0w 0p3n t45k5 - [-]
+
+	~ l3 h1gg3r 3mploy3 #3941123 (4k4 gr4y on3)\n",
+	"Hi, noob.corp.cool
+	I have this platformer, can you guys check it out
+	like.. i have no idea how to touch arrows..
+	I just code i can't play.. PLS PLS PLS HELP
+	
+	~ Cool programmer"
+]
+
+var tasks = [
+	{
+		"Name": "C0NGR4TS 0n 0p3n1ng th1s :DD",
+		"Requim": [
+			{
+				"Text": "Do you sell your spul to this corp"
+			}
+		]
+	}
+]
+
+func getTask(p_index: int) -> String:
+	return tasks[p_index]
+
+func getDiologue(p_index: int) -> String:
+	return diologue[p_index]
+
+func getEmail(p_index: int) -> String:
+	return emails[p_index]

@@ -1,0 +1,146 @@
+[gd_scene load_steps=24 format=4 uid="uid://bip0ybnr51jad"]
+
+[ext_resource type="Texture2D" uid="uid://byqsyy0cvsj4i" path="res://assets/Apps/programmer/bg.png" id="1_yvx4a"]
+[ext_resource type="Texture2D" uid="uid://0b42jbim8x6k" path="res://assets/Apps/programmer/Block.png" id="2_cgbfp"]
+[ext_resource type="Texture2D" uid="uid://13rkjipr6a4s" path="res://assets/Apps/programmer/door.png" id="3_ik1di"]
+[ext_resource type="Script" uid="uid://b6510y5lgspo8" path="res://scripts/apps/programmer/progrmm_5.gd" id="4_qv8h4"]
+[ext_resource type="Texture2D" uid="uid://b8f2dscn5wbh1" path="res://assets/Apps/programmer/Idle1.png" id="5_qv8h4"]
+[ext_resource type="Texture2D" uid="uid://lgphniti77w5" path="res://assets/Apps/programmer/Idle2.png" id="6_77vxt"]
+[ext_resource type="Texture2D" uid="uid://ddsulbs400lrv" path="res://assets/Apps/programmer/jump.png" id="7_7vqx8"]
+[ext_resource type="Texture2D" uid="uid://cl5nydv0jpx6x" path="res://assets/Apps/programmer/walk2.png" id="8_h7hhy"]
+[ext_resource type="Texture2D" uid="uid://3frjqpvrrqjp" path="res://assets/Apps/programmer/walk.png" id="9_xrtsb"]
+[ext_resource type="Texture2D" uid="uid://fdbff2gscow3" path="res://assets/Apps/programmer/victory.png" id="10_e1a8o"]
+[ext_resource type="AudioStream" uid="uid://b3eof7r3qoyng" path="res://assets/Apps/programmer/walking.ogg" id="10_qv8h4"]
+[ext_resource type="AudioStream" uid="uid://chydfqub3wm06" path="res://assets/Apps/programmer/jump_1.ogg" id="11_77vxt"]
+[ext_resource type="AudioStream" uid="uid://bs4ojb6j2ja4f" path="res://assets/Apps/programmer/jump2.ogg" id="12_7vqx8"]
+[ext_resource type="AudioStream" uid="uid://46m0hy4tut1d" path="res://assets/Apps/programmer/jump3.ogg" id="13_h7hhy"]
+[ext_resource type="Script" uid="uid://blv7buc2ng2q0" path="res://scripts/apps/programmer/area_5.gd" id="14_7vqx8"]
+[ext_resource type="Texture2D" uid="uid://bqpl525d3r7ep" path="res://assets/Apps/programmer/you win.png" id="16_h7hhy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_48jv5"]
+texture = ExtResource("2_cgbfp")
+texture_region_size = Vector2i(116, 106)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-53.625015, -50.802647, 58.14081, -51.36712, 57.01186, 49.6737, -58.705284, 51.931595)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlqcv"]
+texture = ExtResource("3_ik1di")
+texture_region_size = Vector2i(116, 106)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_33uoa"]
+tile_size = Vector2i(116, 106)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_48jv5")
+sources/2 = SubResource("TileSetAtlasSource_wlqcv")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hbxe"]
+radius = 47.042534
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqtpq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qv8h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_77vxt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7vqx8")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_h7hhy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xrtsb")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hj6s7"]
+radius = 38.27532
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xrtsb"]
+texture = ExtResource("16_h7hhy")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-103, -394)
+repeat_size = Vector2(500, 300)
+autoscroll = Vector2(10, 0)
+repeat_times = 4
+
+[node name="Bg" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(324, -130)
+scale = Vector2(1.7284944, 1.5059055)
+texture = ExtResource("1_yvx4a")
+offset = Vector2(149, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD7/wAAAQAAAAAAAAD7////AQAAAAAAAAD7//7/AQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAAJAAEAAQAAAAAAAAAKAAEAAQAAAAAAAAALAAEAAQAAAAAAAAAMAAEAAQAAAAAAAAANAAEAAQAAAAAAAAANAAIAAQAAAAAAAAANAAAAAQAAAAAAAAANAP//AQAAAAAAAAANAP7/AQAAAAAAAAAKAP7/AQAAAAAAAAAMAP//AQAAAAAAAAANAP3/AQAAAAAAAAANAPz/AQAAAAAAAAANAPv/AQAAAAAAAAAHAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAHAPr/AQAAAAAAAAD8/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD9/wEAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD8/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAD9/wIAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAAAAgAAAAAAAAAFAAAAAgAAAAAAAAAJAP7/AgAAAAAAAAA=")
+tile_set = SubResource("TileSet_33uoa")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animator")]
+position = Vector2(1, 0)
+script = ExtResource("4_qv8h4")
+animator = NodePath("AnimatedSprite2D")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_5hbxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(2.0000002, 3.9999993)
+scale = Vector2(0.84482753, 0.83018863)
+sprite_frames = SubResource("SpriteFrames_mqtpq")
+animation = &"idle"
+
+[node name="Walking" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("10_qv8h4")
+
+[node name="Jump1" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("11_77vxt")
+
+[node name="Jump2" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("12_7vqx8")
+
+[node name="Jump3" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("13_h7hhy")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("ictory_screen")]
+position = Vector2(822, -353)
+script = ExtResource("14_7vqx8")
+ictory_screen = NodePath("CanvasLayer/Panel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-17, -16)
+shape = SubResource("CircleShape2D_hj6s7")
+
+[node name="Victory" type="Sprite2D" parent="Area2D"]
+position = Vector2(-12, -18)
+texture = ExtResource("10_e1a8o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D"]
+
+[node name="Panel" type="Panel" parent="Area2D/CanvasLayer"]
+visible = false
+offset_right = 360.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_xrtsb")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

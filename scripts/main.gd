@@ -20,6 +20,7 @@ var task_curent: Dictionary
 var task_requim_index = 0
 var task_failed = false
 var task_done = false
+var task_unhappy = ""
 
 var app_index = -1
 var app_curent = null
@@ -52,7 +53,12 @@ func stopWriting() -> void:
 	if email_death:
 		setHand("explosion_aft")
 		await get_tree().create_timer(0.5).timeout
-		get_tree().reload_current_scene()
+		email_death_debounce = false
+		write_enabled = false
+		write_locked = false
+		email_death = false
+		task_failed = false
+		console.addSlowText(".................................................\nYou exploded..\n..................................................\n BUT SUDENTLY, a bright light shined and you got back up\n")
 	else:
 		if write_locked:
 			#Writing chains
@@ -95,19 +101,19 @@ func checkSpecial() -> void:
 			_:
 				var lastinput = console.getLast(0)
 				if task_requim_index < task_curent["Requims"].size() and email_opened: 
-					if lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
-						task_failed = true
+					if lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
 						task_requim_index += 1
 						write_enabled = false
 						console.addNewLine()
 						taskWrite()
-						print("FAILED")
-					elif lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
+					elif lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
+						if task_curent["Requims"][task_requim_index]["Possible"]:
+							task_failed = true
+							task_unhappy = task_curent["Requims"][task_requim_index]["Text"]
 						task_requim_index += 1
 						write_enabled = false
 						console.addNewLine()
 						taskWrite()
-						print("YESS")
 				return
 	else:
 		match console.getLast(0):
@@ -144,7 +150,7 @@ func checkSpecial() -> void:
 					$Tttr1t.play()
 				console.addNewLine()
 				newLine()
-			"DOWN":
+			"DOWNLOAD":
 				console.addNewLine()
 				if app_curent:
 					write_enabled = false
@@ -238,7 +244,7 @@ func email(p_index: int) -> void:
 	if task_done and email_opened:
 		email_opened = false
 		if task_failed:
-			console.addSlowText(task_curent["Fail"])
+			console.addSlowText("UH OH -> "+task_unhappy + "<-\n" + task_curent["Fail"])
 			email_death = true
 		else:
 			console.addText(task_curent["Succes"])
@@ -256,7 +262,7 @@ func downloadChain() -> void:
 		download_downloading = false
 		write_locked = false
 	write_enabled = false
-	console.addSlowText(app_curent["Modules"][download_module_index]+"\t\t [#####]-[#####]=[#####]-[#####] -+_ DONE\n")
+	console.addSlowText(app_curent["Modules"][download_module_index]+"\t\t [##-##=##-##] -+_ DONE\n")
 	download_module_index += 1
 
 func detectKeyboard() -> String:

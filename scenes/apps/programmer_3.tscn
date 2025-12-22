@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=4 uid="uid://c5cn4ws0alx3i"]
+
+[ext_resource type="Texture2D" uid="uid://0b42jbim8x6k" path="res://assets/Apps/programmer/Block.png" id="1_qa0gc"]
+[ext_resource type="Script" uid="uid://bnmvsxd5srar" path="res://scripts/apps/programmer/progrmm_2.gd" id="2_1l3vr"]
+[ext_resource type="Texture2D" uid="uid://13rkjipr6a4s" path="res://assets/Apps/programmer/door.png" id="2_21vvi"]
+[ext_resource type="Texture2D" uid="uid://b8f2dscn5wbh1" path="res://assets/Apps/programmer/Idle1.png" id="3_mtxt8"]
+[ext_resource type="Texture2D" uid="uid://lgphniti77w5" path="res://assets/Apps/programmer/Idle2.png" id="4_1l3vr"]
+[ext_resource type="Texture2D" uid="uid://ddsulbs400lrv" path="res://assets/Apps/programmer/jump.png" id="5_a5tn8"]
+[ext_resource type="Texture2D" uid="uid://cl5nydv0jpx6x" path="res://assets/Apps/programmer/walk2.png" id="6_qa0gc"]
+[ext_resource type="Texture2D" uid="uid://3frjqpvrrqjp" path="res://assets/Apps/programmer/walk.png" id="7_21vvi"]
+[ext_resource type="Texture2D" uid="uid://fdbff2gscow3" path="res://assets/Apps/programmer/victory.png" id="9_mqtpq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y0aux"]
+texture = ExtResource("1_qa0gc")
+texture_region_size = Vector2i(116, 106)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-53.625015, -50.802647, 58.14081, -51.36712, 57.01186, 49.6737, -58.705284, 51.931595)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a83ge"]
+texture = ExtResource("2_21vvi")
+texture_region_size = Vector2i(116, 106)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gy4bq"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_y0aux")
+sources/2 = SubResource("TileSetAtlasSource_a83ge")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hbxe"]
+radius = 62.369865
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqtpq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mtxt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1l3vr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a5tn8")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qa0gc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_21vvi")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hj6s7"]
+radius = 38.27532
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD7/wAAAQAAAAAAAAD7////AQAAAAAAAAD7//7/AQAAAAAAAAAEAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAP//AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAAJAAEAAQAAAAAAAAAKAAEAAQAAAAAAAAALAAEAAQAAAAAAAAAMAAEAAQAAAAAAAAANAAEAAQAAAAAAAAANAAIAAQAAAAAAAAANAAAAAQAAAAAAAAANAP//AQAAAAAAAAANAP7/AQAAAAAAAAAJAP7/AQAAAAAAAAAKAP7/AQAAAAAAAAAMAP//AQAAAAAAAAANAP3/AQAAAAAAAAANAPz/AQAAAAAAAAANAPv/AQAAAAAAAAAHAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAHAPr/AQAAAAAAAAD8/wEAAQAAAAAAAAD7/wEAAQAAAAAAAAD9/wEAAQAAAAAAAAD+/wEAAQAAAAAAAAD//wEAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAACAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD8/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAD9/wIAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAACAAIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAAAAgAAAAAAAAAFAAAAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_gy4bq")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 553.0
+offset_top = 11.0
+offset_right = 601.0
+offset_bottom = 34.0
+text = "DOOR"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 860.0
+offset_top = -453.0
+offset_right = 913.0
+offset_bottom = -430.0
+text = "victory"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animator")]
+script = ExtResource("2_1l3vr")
+animator = NodePath("AnimatedSprite2D")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_5hbxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, 6.0000014)
+scale = Vector2(1.1034483, 1.226415)
+sprite_frames = SubResource("SpriteFrames_mqtpq")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(896, -415)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-17, -16)
+shape = SubResource("CircleShape2D_hj6s7")
+
+[node name="Victory" type="Sprite2D" parent="Area2D"]
+position = Vector2(-12, -18)
+texture = ExtResource("9_mqtpq")

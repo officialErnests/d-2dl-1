@@ -19,9 +19,9 @@ var diologue = [
 
 	\tx__--// APP \\\\--__x
 	\t\tAPP\t\t\t\t\tOPENS DOWNLOADED APP
-	\t\tCLOSE\t\t\t\t\tCLOSES OPENED APP
+	\t\tCLOSE\t\t\t\tCLOSES OPENED APP
 	\t\tDELETE\t\t\tDELETES APP
-	\t\tDOWN\t\t\tDOWNLOADS NEWEST APP\n",
+	\t\tDOWNLOAD\t\tDOWNLOADS NEWEST APP\n",
 	#2 - exit
 	"TF YOU THINK YOU GOING XD\n",
 	#3 - exit
@@ -56,7 +56,7 @@ var emails = [
 		"Task": 0,
 		"App": 0
 	},
-	{
+	{ #rpogrammer
 		"Content": "Hi, noob.corp.cool
 		I have this platformer, can you guys check it out
 		like.. i have no idea how to touch arrows..
@@ -65,6 +65,47 @@ var emails = [
 		+_ Cool programmer _+\n",
 		"Task": 1,
 		"App": 1
+	},
+	{ #rpogrammer
+		"Content": "Hello, noob.corp.cool
+		Here i am.. again,, stil only keyboard.
+		plsss check aagain ;-;
+		
+		+_ Cool programmer _+\n",
+		"Task": 2,
+		"App": 2
+	},
+	{ #rpogrammer
+		"Content": "Hii, noob.corp.cool
+		
+		After last upload.. i have added some assets..
+		I really hope my bdget plan can aford the extra mb T>T
+		Either way.. thanks!
+		
+		+_ Cool programmer _+\n",
+		"Task": 3,
+		"App": 3
+	},
+	{ #rpogrammer
+		"Content": "Last one, noob.corp.cool
+		
+		I am readdy to publish.. well i still need on last QA 
+		I hope it works out, and if everything on checklist works..
+		Then you must have enjoyed the game!
+		
+		+_ Cool programmer _+\n",
+		"Task": 4,
+		"App": 4
+	},
+	{ #rpogrammer
+		"Content": "Small error, noob.corp.cool
+		
+		I found and fixed it. This is truly the last one, thanks!
+		Either way after many not slept nights i found error.
+		
+		+_ Cool programmer _+\n",
+		"Task": 5,
+		"App": 5
 	}
 ]
 
@@ -76,25 +117,29 @@ var tasks = [
 				"Text": "D0 y0u 53ll y0ur [i]UNG0DLY 50UL[/i] t0 th15 noob.corp.c00l",
 				"Prompt": "Y - y35 || n0 - N\n",
 				"Expected": "Y",
-				"NoNo": "N"
+				"NoNo": "N",
+				"Possible": true
 			},
 			{
 				"Text": "G0 D0WNL04D APP",
 				"Prompt": "|| EXIT || DOWN || APP || C 70 C0N71NU3\n",
 				"Expected": "C",
-				"NoNo": "NUHUH"
+				"NoNo": "NUHUH",
+				"Possible": true
 			},
 			{
 				"Text": "?? D035 17 0P3N UP",
 				"Prompt": "Y - y35 || n0 - N\n",
 				"Expected": "Y",
-				"NoNo": "N"
+				"NoNo": "N",
+				"Possible": true
 			},
 			{
 				"Text": "?? 4R3 7#3R3 [[2]] 0",
 				"Prompt": "Y - y35 || n0 - N\n",
 				"Expected": "Y",
-				"NoNo": "N"
+				"NoNo": "N",
+				"Possible": true
 			}
 		],
 		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
@@ -103,146 +148,351 @@ var tasks = [
 		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D
 		(0N3 L457 71P,,,.. Y0U C4N CL053 4PP W17# -==CLOSE==-)\n"
 	},
+#* PROGRAMMER ------------------------------------------
+	#1
 	{
 		"Name": "Some.. questions i have on top of the head, i would like to know...\n",
 		"Requims": [
 			{
 				"Text": "Does.. does this app open on your system??",
 				"Prompt": "Yeah / nope\n",
-				"Expected": "Yeah",
-				"NoNo": "nope"
+				"Expected": "NOPE",
+				"NoNo": "YEAH",
+				"Possible": true
 			},
 			{
 				"Text": "Can you.. like move around.. using arrows?",
 				"Prompt": "Works / no\n",
-				"Expected": "Works",
-				"NoNo": "no"
+				"Expected": "WORKS",
+				"NoNo": "NO",
+				"Possible": false
 			},
 			{
-				"Text": "Does the door collision work>>?",
-				"Prompt": "Solid / nope\n",
-				"Expected": "Solid",
-				"NoNo": "nope"
+				"Text": "Can you walk trough door?",
+				"Prompt": "Yup / nope\n",
+				"Expected": "YUP",
+				"NoNo": "NOPE",
+				"Possible": false
 			},
 			{
 				"Text": "Can you beat the level?",
 				"Prompt": "Ez / Impossible\n",
-				"Expected": "Ez",
-				"NoNo": "Impossible"
+				"Expected": "EZ",
+				"NoNo": "IMPOSSIBLE",
+				"Possible": false
 			},
 			{
 				"Text": "Does victory screen work?",
 				"Prompt": "Yeah / no\n",
-				"Expected": "Yeah",
-				"NoNo": "no"
+				"Expected": "YEAH",
+				"NoNo": "NO",
+				"Possible": false
 			},
 			{
 				"Text": "Did.. did you enjoy the game? (please be honest)",
 				"Prompt": "YESSS / HELL\n",
 				"Expected": "YESSS",
-				"NoNo": "HELL"
+				"NoNo": "HELL",
+				"Possible": false
 			}
 		],
 		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
 		"Succes": "Oh wow, thanks for feedback!\n"
 	},
+	#2
 	{
-		"Name": "Some.. of the head items i would like to know...\n",
+		"Name": "I just pasted in the previous tasks.. if that is alright\n",
 		"Requims": [
 			{
 				"Text": "Does.. does this app open on your system??",
 				"Prompt": "Yeah / nope\n",
-				"Expected": "Yeah",
-				"NoNo": "nope"
+				"Expected": "YEAH",
+				"NoNo": "NOPE",
+				"Possible": true
 			},
 			{
 				"Text": "Can you.. like move around.. using arrows?",
 				"Prompt": "Works / no\n",
-				"Expected": "Works",
-				"NoNo": "no"
+				"Expected": "WORKS",
+				"NoNo": "NO",
+				"Possible": true
 			},
 			{
-				"Text": "Does the door collision work>>?",
-				"Prompt": "Solid / nope\n",
-				"Expected": "Solid",
-				"NoNo": "nope"
+				"Text": "Can you walk trough door?",
+				"Prompt": "Yup / nope\n",
+				"Expected": "NOPE",
+				"NoNo": "YUP",
+				"Possible": true
 			},
 			{
 				"Text": "Can you beat the level?",
 				"Prompt": "Ez / Impossible\n",
-				"Expected": "Ez",
-				"NoNo": "Impossible"
+				"Expected": "EZ",
+				"NoNo": "IMPOSSIBLE",
+				"Possible": false
 			},
 			{
 				"Text": "Does victory screen work?",
 				"Prompt": "Yeah / no\n",
-				"Expected": "Yeah",
-				"NoNo": "no"
+				"Expected": "YEAH",
+				"NoNo": "NO",
+				"Possible": false
 			},
 			{
 				"Text": "Did.. did you enjoy the game? (please be honest)",
 				"Prompt": "YESSS / HELL\n",
-				"Expected": "YESSS",
-				"NoNo": "HELL"
+				"Expected": "HELL",
+				"NoNo": "YESSS",
+				"Possible": true
 			}
 		],
 		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
 		"Succes": "Oh wow, thanks for feedback!\n"
 	},
+	#3
 	{
-		"Name": "Some.. of the head items i would like to know...\n",
+		"Name": "Previous tasks once again!\n",
 		"Requims": [
 			{
 				"Text": "Does.. does this app open on your system??",
 				"Prompt": "Yeah / nope\n",
-				"Expected": "Yeah",
-				"NoNo": "nope"
+				"Expected": "YEAH",
+				"NoNo": "NOPE",
+				"Possible": true
 			},
 			{
 				"Text": "Can you.. like move around.. using arrows?",
 				"Prompt": "Works / no\n",
-				"Expected": "Works",
-				"NoNo": "no"
+				"Expected": "WORKS",
+				"NoNo": "NO",
+				"Possible": true
 			},
 			{
-				"Text": "Does the door collision work>>?",
-				"Prompt": "Solid / nope\n",
-				"Expected": "Solid",
-				"NoNo": "nope"
+				"Text": "Can you walk trough door?",
+				"Prompt": "Yup / nope\n",
+				"Expected": "YUP",
+				"NoNo": "NOPE",
+				"Possible": true
 			},
 			{
 				"Text": "Can you beat the level?",
 				"Prompt": "Ez / Impossible\n",
-				"Expected": "Ez",
-				"NoNo": "Impossible"
+				"Expected": "IMPOSSIBLE",
+				"NoNo": "EZ",
+				"Possible": true
 			},
 			{
 				"Text": "Does victory screen work?",
 				"Prompt": "Yeah / no\n",
-				"Expected": "Yeah",
-				"NoNo": "no"
+				"Expected": "NO",
+				"NoNo": "YEAH",
+				"Possible": false
+			},
+			{
+				"Text": "Did.. did you enjoy the game? (please be honest)",
+				"Prompt": "YESSS / HELL\n",
+				"Expected": "HELL",
+				"NoNo": "YESSS",
+				"Possible": true
+			}
+		],
+		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
+		"Succes": "Oh wow, thanks for feedback!\n"
+	},
+	#4
+	{
+		"Name": "Thanks alot, this is the final one!\n",
+		"Requims": [
+			{
+				"Text": "Does.. does this app open on your system??",
+				"Prompt": "Yeah / nope\n",
+				"Expected": "YEAH",
+				"NoNo": "NOPE",
+				"Possible": true
+			},
+			{
+				"Text": "Can you.. like move around.. using arrows?",
+				"Prompt": "Works / no\n",
+				"Expected": "WORKS",
+				"NoNo": "NO",
+				"Possible": true
+			},
+			{
+				"Text": "Can you walk trough door?",
+				"Prompt": "Yup / nope\n",
+				"Expected": "YUP",
+				"NoNo": "NOPE",
+				"Possible": true
+			},
+			{
+				"Text": "Can you beat the level?",
+				"Prompt": "Ez / Impossible\n",
+				"Expected": "EZ",
+				"NoNo": "IMPOSSIBLE",
+				"Possible": true
+			},
+			{
+				"Text": "Does victory screen work?",
+				"Prompt": "Yeah / no\n",
+				"Expected": "NO",
+				"NoNo": "YEAH",
+				"Possible": true
+			},
+			{
+				"Text": "Did.. did you enjoy the game? (please be honest)",
+				"Prompt": "YESSS / HELL\n",
+				"Expected": "HELL",
+				"NoNo": "YESSS",
+				"Possible": true
+			}
+		],
+		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
+		"Succes": "Oh wow, thanks for QA noob.corp.cool\n"
+	},
+	#5
+	{
+		"Name": "Sorry for last time.. but i hope this is it\n",
+		"Requims": [
+			{
+				"Text": "Does.. does this app open on your system??",
+				"Prompt": "Yeah / nope\n",
+				"Expected": "YEAH",
+				"NoNo": "NOPE",
+				"Possible": true
+			},
+			{
+				"Text": "Can you.. like move around.. using arrows?",
+				"Prompt": "Works / no\n",
+				"Expected": "WORKS",
+				"NoNo": "NO",
+				"Possible": true
+			},
+			{
+				"Text": "Can you walk trough door?",
+				"Prompt": "Yup / nope\n",
+				"Expected": "YUP",
+				"NoNo": "NOPE",
+				"Possible": true
+			},
+			{
+				"Text": "Can you beat the level?",
+				"Prompt": "Ez / Impossible\n",
+				"Expected": "EZ",
+				"NoNo": "IMPOSSIBLE",
+				"Possible": true
+			},
+			{
+				"Text": "Does victory screen work?",
+				"Prompt": "Yeah / no\n",
+				"Expected": "YEAH",
+				"NoNo": "NO",
+				"Possible": true
 			},
 			{
 				"Text": "Did.. did you enjoy the game? (please be honest)",
 				"Prompt": "YESSS / HELL\n",
 				"Expected": "YESSS",
-				"NoNo": "HELL"
+				"NoNo": "HELL",
+				"Possible": true
 			}
 		],
 		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
-		"Succes": "Oh wow, thanks for feedback!\n"
+		"Succes": "Oh wow, thanks for QA noob.corp.cool\n"
 	}
 ]
 
 var apps = [
+	#0
 	{
 		"Name": "73571NG 4PP",
-		"Size": "4.0mb",
+		"Size": "4mb",
 		"Modules": [
 			"Core",
 			"Text_display"
 		],
 		"Scene": preload("res://scenes/apps/TestApp.tscn")
+	},
+	#* PROGRaMMER ---------------------------------------
+	#1
+	{
+		"Name": "Cool platformer",
+		"Size": "23.5mb",
+		"Modules": [
+			"Core",
+			"Text_display",
+			"Player",
+			"Level",
+			"Movement",
+		],
+		"Scene": preload("res://scenes/apps/programmer_1.tscn")
+	},
+	#2
+	{
+		"Name": "Cool platformer",
+		"Size": "26mb",
+		"Modules": [
+			"Core",
+			"Text_display",
+			"Packgaker",
+			"Player",
+			"Level",
+			"Movement",
+			"Door",
+			"Logic"
+		],
+		"Scene": preload("res://scenes/apps/programmer_2.tscn")
+	},
+	#3
+	{
+		"Name": "Cool platformer",
+		"Size": "50.3mb",
+		"Modules": [
+			"Core",
+			"Text_display",
+			"Assets",
+			"Packgaker",
+			"Player v2",
+			"Level",
+			"Movement",
+			"Door",
+			"Logic"
+		],
+		"Scene": preload("res://scenes/apps/programmer_3.tscn")
+	},
+	#4
+	{
+		"Name": "Cool platformer",
+		"Size": "52.8mb",
+		"Modules": [
+			"Core",
+			"Text_display",
+			"Assets",
+			"Packgaker",
+			"Player v3",
+			"Level",
+			"Movement",
+			"Door",
+			"Logic"
+		],
+		"Scene": preload("res://scenes/apps/programmer_4.tscn")
+	},
+	#5
+	{
+		"Name": "Cool platformer",
+		"Size": "54.2mb",
+		"Modules": [
+			"Core",
+			"Text_display",
+			"Assets",
+			"Packgaker",
+			"Player v3",
+			"Level",
+			"Movement",
+			"Win",
+			"Door",
+			"Logic"
+		],
+		"Scene": preload("res://scenes/apps/programmer_5.tscn")
 	}
 ]
 

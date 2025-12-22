@@ -1,4 +1,42 @@
-[gd_scene format=3 uid="uid://cob5of4c7gtwd"]
+[gd_scene load_steps=5 format=3 uid="uid://cob5of4c7gtwd"]
+
+[ext_resource type="Script" uid="uid://d4ny76vx0rehm" path="res://scripts/ready/start_animator.gd" id="1_jbgey"]
+
+[sub_resource type="Animation" id="Animation_3cche"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect24:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09, 0.27, 0.37, 0.5, 0.65, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-11, -12), Vector2(-10.55, 21.66), Vector2(-9.65, 88.979996), Vector2(-9.15, 126.380005), Vector2(-8.5, 175), Vector2(-7.75, 231.09999), Vector2(-6.5, 324.59998), Vector2(-6, 362)]
+}
+
+[sub_resource type="Animation" id="Animation_1gm6l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect24:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, -12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hadh7"]
+_data = {
+&"RESET": SubResource("Animation_1gm6l"),
+&"start": SubResource("Animation_3cche")
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -202,3 +240,17 @@ offset_top = 28.0
 offset_right = 260.0
 offset_bottom = 148.0
 color = Color(0, 1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hadh7")
+}
+script = ExtResource("1_jbgey")
+
+[node name="ColorRect24" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 381.0
+offset_bottom = 387.0
+color = Color(0, 0, 0, 1)

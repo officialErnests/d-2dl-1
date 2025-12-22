@@ -20,6 +20,12 @@ func addText(p_text: String) -> void:
 	text += p_text
 	showText()
 
+func addSlowText(p_text: String) -> void:
+	visible_characters = get_parsed_text().length()
+	text += p_text
+	showTextSlow()
+
+
 func clearText() -> void:
 	text = ""
 	visible_characters = -1
@@ -55,6 +61,15 @@ func showText() -> void:
 		else:
 			visible_characters = -1
 			done.emit()
+
+func showTextSlow() -> void:
+	if get_parsed_text().length() > visible_characters:
+		visible_characters += 1
+		await get_tree().create_timer(text_delay).timeout
+		showTextSlow()
+	else:
+		visible_characters = -1
+		done.emit()
 
 func fastModeToggle() -> void:
 	fast_mode = not fast_mode

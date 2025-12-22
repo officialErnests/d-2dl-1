@@ -9,13 +9,14 @@ var write_enabled = false
 var write_locked = false
 var previous_cahrecter = ""
 
+var email_opened = false
 var email_index = 0
 var email_death = false
 var email_death_debounce = false
 
 var task_index = -1
 var task_mode = false
-var task_curent
+var task_curent: Dictionary
 var task_requim_index = 0
 var task_failed = false
 var task_done = false
@@ -89,9 +90,11 @@ func checkSpecial() -> void:
 			"REPEAT":
 				console.addNewLine()
 				taskWrite()
+			"QUIT":
+				get_tree().quit()
 			_:
 				var lastinput = console.getLast(0)
-				if task_requim_index < task_curent["Requims"].size(): 
+				if task_requim_index < task_curent["Requims"].size() and email_opened: 
 					if lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
 						task_failed = true
 						task_requim_index += 1
@@ -125,6 +128,7 @@ func checkSpecial() -> void:
 				email(email_index)
 				task_index = Diologue.getEmail(email_index)["Task"]
 				app_index = Diologue.getEmail(email_index)["App"]
+				task_done = false
 				task_requim_index = 0
 			"TASK":
 				console.addNewLine()
@@ -146,6 +150,10 @@ func checkSpecial() -> void:
 					write_enabled = false
 					console.addText("Memmory slot full x-x\nPlease delete previos app before downloading\n")
 				else:
+					if app_index == -1:
+						write_enabled = false
+						console.addText("No app found in NMAIL attachment ;;--;;\n")
+						return
 					app_curent = Diologue.getApp(app_index)
 					write_enabled = false
 					write_locked = true
@@ -187,6 +195,8 @@ func checkSpecial() -> void:
 				else:
 					write_enabled = false
 					console.addText("No app found to satisfy my hunger....\n")
+			"QUIT":
+				get_tree().quit()
 			_:
 				return
 
@@ -204,7 +214,7 @@ func task(p_index) -> void:
 	console.addText("[b]--==|| Task mode ,,--.. EXIT [to] EXIT ||==--[/b]\n"+task_curent["Name"])
 
 func taskWrite() -> void:
-	if task_requim_index >= task_curent["Requims"].size(): 
+	if task_requim_index >= task_curent["Requims"].size() or not email_opened: 
 		task_done = true
 		write_enabled = false
 		write_locked = false
@@ -225,17 +235,17 @@ func diologue(p_index: int) -> void:
 
 func email(p_index: int) -> void:
 	write_enabled = false
-	if task_done:
+	if task_done and email_opened:
+		email_opened = false
 		if task_failed:
-			if console.getMode(): console.fastModeToggle()
-			console.addText(task_curent["Fail"])
+			console.addSlowText(task_curent["Fail"])
 			email_death = true
 		else:
 			console.addText(task_curent["Succes"])
 			email_index += 1
-			task_done = false
 	else:
 		console.addText(Diologue.getEmail(p_index)["Content"])
+		email_opened = true
 
 func downloadChain() -> void:
 	if download_module_index > app_curent["Modules"].size() - 1:
@@ -245,7 +255,8 @@ func downloadChain() -> void:
 	if download_module_index == app_curent["Modules"].size() - 1:
 		download_downloading = false
 		write_locked = false
-	console.addText(app_curent["Modules"][download_module_index]+"\t\t [#####]-[#####]=[#####]-[#####] -+_ DONE\n")
+	write_enabled = false
+	console.addSlowText(app_curent["Modules"][download_module_index]+"\t\t [#####]-[#####]=[#####]-[#####] -+_ DONE\n")
 	download_module_index += 1
 
 func detectKeyboard() -> String:

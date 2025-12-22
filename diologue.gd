@@ -9,8 +9,9 @@ var diologue = [
 	\t\tHELP\t\t\t\tDISPLAYS ALL THE COMMANDS
 	\t\tENTER\t\t\t\tCLEARS COMMAND
 	\t\tCLEAR\t\t\t\tCLEARS COMMAND FR FR
-	\t\tMUSIC\t\t\t\tTOGGLES MUSIC (Actually don't.. stay in silent bliss ;-;)
+	\t\tMUSIC\t\t\t\tTOGGLES NOISE
 	\t\tFAST\t\t\t\tSPEEDS UP BOMB TIMER XDD
+	\t\tQUIT\t\t\t\tQUITS COMPUTER AND EXPLODES
 
 	\tx__--// JOB \\\\--__x
 	\t\tNMAIL\t\t\t\tCHECK YOUR EMAIL
@@ -79,8 +80,8 @@ var tasks = [
 			},
 			{
 				"Text": "G0 D0WNL04D APP",
-				"Prompt": "|| EXIT ||\n",
-				"Expected": "EXIT",
+				"Prompt": "|| EXIT || DOWN || APP || C 70 C0N71NU3\n",
+				"Expected": "C",
 				"NoNo": "NUHUH"
 			},
 			{
@@ -88,24 +89,9 @@ var tasks = [
 				"Prompt": "Y - y35 || n0 - N\n",
 				"Expected": "Y",
 				"NoNo": "N"
-			}
-		],
-		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
-		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
-		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
-		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D\n"
-	},
-	{
-		"Name": "C0NGR4T5 0n 0p3n1ng th15 :DD\n",
-		"Requims": [
-			{
-				"Text": "D0 y0u 53ll y0ur [i]UNG0DLY 50UL[/i] t0 th15 noob.corp.c00l",
-				"Prompt": "Y - y35 || n0 - N\n",
-				"Expected": "Y",
-				"NoNo": "N"
 			},
 			{
-				"Text": "?? 4R3 Y0U 3X173D !!",
+				"Text": "?? 4R3 7#3R3 [[2]] 0",
 				"Prompt": "Y - y35 || n0 - N\n",
 				"Expected": "Y",
 				"NoNo": "N"
@@ -114,7 +100,137 @@ var tasks = [
 		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
 		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
 		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
-		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D\n"
+		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D
+		(0N3 L457 71P,,,.. Y0U C4N CL053 4PP W17# -==CLOSE==-)\n"
+	},
+	{
+		"Name": "Some.. questions i have on top of the head, i would like to know...\n",
+		"Requims": [
+			{
+				"Text": "Does.. does this app open on your system??",
+				"Prompt": "Yeah / nope\n",
+				"Expected": "Yeah",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you.. like move around.. using arrows?",
+				"Prompt": "Works / no\n",
+				"Expected": "Works",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Does the door collision work>>?",
+				"Prompt": "Solid / nope\n",
+				"Expected": "Solid",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you beat the level?",
+				"Prompt": "Ez / Impossible\n",
+				"Expected": "Ez",
+				"NoNo": "Impossible"
+			},
+			{
+				"Text": "Does victory screen work?",
+				"Prompt": "Yeah / no\n",
+				"Expected": "Yeah",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Did.. did you enjoy the game? (please be honest)",
+				"Prompt": "YESSS / HELL\n",
+				"Expected": "YESSS",
+				"NoNo": "HELL"
+			}
+		],
+		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
+		"Succes": "Oh wow, thanks for feedback!\n"
+	},
+	{
+		"Name": "Some.. of the head items i would like to know...\n",
+		"Requims": [
+			{
+				"Text": "Does.. does this app open on your system??",
+				"Prompt": "Yeah / nope\n",
+				"Expected": "Yeah",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you.. like move around.. using arrows?",
+				"Prompt": "Works / no\n",
+				"Expected": "Works",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Does the door collision work>>?",
+				"Prompt": "Solid / nope\n",
+				"Expected": "Solid",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you beat the level?",
+				"Prompt": "Ez / Impossible\n",
+				"Expected": "Ez",
+				"NoNo": "Impossible"
+			},
+			{
+				"Text": "Does victory screen work?",
+				"Prompt": "Yeah / no\n",
+				"Expected": "Yeah",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Did.. did you enjoy the game? (please be honest)",
+				"Prompt": "YESSS / HELL\n",
+				"Expected": "YESSS",
+				"NoNo": "HELL"
+			}
+		],
+		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
+		"Succes": "Oh wow, thanks for feedback!\n"
+	},
+	{
+		"Name": "Some.. of the head items i would like to know...\n",
+		"Requims": [
+			{
+				"Text": "Does.. does this app open on your system??",
+				"Prompt": "Yeah / nope\n",
+				"Expected": "Yeah",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you.. like move around.. using arrows?",
+				"Prompt": "Works / no\n",
+				"Expected": "Works",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Does the door collision work>>?",
+				"Prompt": "Solid / nope\n",
+				"Expected": "Solid",
+				"NoNo": "nope"
+			},
+			{
+				"Text": "Can you beat the level?",
+				"Prompt": "Ez / Impossible\n",
+				"Expected": "Ez",
+				"NoNo": "Impossible"
+			},
+			{
+				"Text": "Does victory screen work?",
+				"Prompt": "Yeah / no\n",
+				"Expected": "Yeah",
+				"NoNo": "no"
+			},
+			{
+				"Text": "Did.. did you enjoy the game? (please be honest)",
+				"Prompt": "YESSS / HELL\n",
+				"Expected": "YESSS",
+				"NoNo": "HELL"
+			}
+		],
+		"Fail": "OH NO, the customer wasn't so happy// YOUR TIME has come, cya lDD\n",
+		"Succes": "Oh wow, thanks for feedback!\n"
 	}
 ]
 

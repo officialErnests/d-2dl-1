@@ -1,7 +1,8 @@
 extends RichTextLabel
 
-var text_delay = 0.01
+var text_delay = 0.0
 var can_type = false
+var fast_mode = false
 
 signal done()
 
@@ -42,10 +43,18 @@ func getLast(p_offset) -> String:
 	return result.reverse()
 
 func showText() -> void:
-	if get_parsed_text().length() > visible_characters:
-		visible_characters += 1
-		await get_tree().create_timer(text_delay).timeout
-		showText()
-	else:
+	if fast_mode:
 		visible_characters = -1
 		done.emit()
+		return
+	else:
+		if get_parsed_text().length() > visible_characters:
+			visible_characters += 1
+			await get_tree().create_timer(text_delay).timeout
+			showText()
+		else:
+			visible_characters = -1
+			done.emit()
+
+func fastModeToggle() -> void:
+	fast_mode = not fast_mode

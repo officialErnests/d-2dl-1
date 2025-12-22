@@ -383,6 +383,7 @@ offset_bottom = 350.0
 theme_override_colors/default_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 10
 theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/italics_font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wfs7u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_i2l1n")
 bbcode_enabled = true

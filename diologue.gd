@@ -10,6 +10,7 @@ var diologue = [
 	\t\tENTER\t\t\t\tCLEARS COMMAND
 	\t\tCLEAR\t\t\t\tCLEARS COMMAND FR FR
 	\t\tMUSIC\t\t\t\tTOGGLES MUSIC (Actually don't.. stay in silent bliss ;-;)
+	\t\tFAST\t\t\t\tSPEEDS UP BOMB TIMER XDD
 
 	\tx__--// JOB \\\\--__x
 	\t\tNMAIL\t\t\t\tCHECK YOUR EMAIL
@@ -80,8 +81,9 @@ var tasks = [
 				"NoNo": "N"
 			}
 		],
-		"Fail": "00P5135 wr0ng 4n5w3r5, l0lz135
-		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*",
+		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
+		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
+		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
 		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D"
 	}
 ]

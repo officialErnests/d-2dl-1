@@ -6,12 +6,15 @@ var write_enabled = false
 # used when the code still needs controll after writing
 var write_locked = false
 var previous_cahrecter = ""
+
+var email_index = 0
+
 var task_index = -1
 var task_mode = false
 var task_curent
 var task_requim_index = 0
 var task_failed = false
-var email_index = 0
+var task_done = false
 
 func start() -> void:
 	diologue(0)
@@ -64,28 +67,17 @@ func checkSpecial() -> void:
 				taskWrite()
 			_:
 				var lastinput = console.getLast(0)
-				if lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
-					print("A:" + lastinput + task_curent["Requims"][task_requim_index]["NoNo"]);
-					task_failed = true
-					task_requim_index += 1
-					write_enabled = false
-					console.addNewLine()
-					if task_requim_index >= task_curent["Requims"].size(): 
+				if task_requim_index < task_curent["Requims"].size(): 
+					if lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
+						task_failed = true
+						task_requim_index += 1
 						write_enabled = false
-						write_locked = false
-						taskExit()
-					else:
+						console.addNewLine()
 						taskWrite()
-				elif lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
-					print("B:" + lastinput + task_curent["Requims"][task_requim_index]["Expected"]);
-					task_requim_index += 1
-					write_enabled = false
-					console.addNewLine()
-					if task_requim_index >= task_curent["Requims"].size(): 
+					elif lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
+						task_requim_index += 1
 						write_enabled = false
-						write_locked = false
-						taskExit()
-					else:
+						console.addNewLine()
 						taskWrite()
 				return
 	else:
@@ -110,6 +102,10 @@ func checkSpecial() -> void:
 			"TASK":
 				console.addNewLine()
 				task(task_index)
+			"FAST":
+				console.fastModeToggle()
+				console.addNewLine()
+				newLine()
 			"MUSIC":
 				if $Tttr1t.playing:
 					$Tttr1t.stop()
@@ -134,6 +130,12 @@ func task(p_index) -> void:
 	console.addText("[b]--==|| Task mode ,,--.. EXIT [to] EXIT ||==--[/b]\n"+task_curent["Name"])
 
 func taskWrite() -> void:
+	if task_requim_index >= task_curent["Requims"].size(): 
+		task_done = true
+		write_enabled = false
+		write_locked = false
+		console.addText("All tasks done ;PP\nPlease proceed to check [i]tm(NMAIL)[/i]\n")
+		return
 	write_enabled = false
 	write_locked = false
 	console.addText("[b]"+str(task_requim_index+1) + "}{--= Numero of tasssky =--}{"+ str(task_requim_index+1)+ "[/b]\n"+task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
@@ -142,7 +144,6 @@ func taskExit() -> void:
 	console.clearText()
 	task_mode = false
 	console.addText("--==|| EXIIITED Task mode EXIIITED ||==--\n")
-	newLine()
 
 func diologue(p_index: int) -> void:
 	write_enabled = false
@@ -150,7 +151,13 @@ func diologue(p_index: int) -> void:
 
 func email(p_index: int) -> void:
 	write_enabled = false
-	console.addText(Diologue.getEmail(p_index)["Content"])
+	if task_done:
+		if task_failed:
+			console.addText(task_curent["Succes"])
+		else:
+			console.addText(task_curent["Fail"])
+	else:
+		console.addText(Diologue.getEmail(p_index)["Content"])
 
 func detectKeyboard() -> String:
 	# others

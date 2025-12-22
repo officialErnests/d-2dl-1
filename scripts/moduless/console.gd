@@ -58,3 +58,6 @@ func showText() -> void:
 
 func fastModeToggle() -> void:
 	fast_mode = not fast_mode
+
+func getMode() -> bool:
+	return fast_mode

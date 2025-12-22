@@ -1,6 +1,8 @@
 extends Node
 
 @export var console: Control
+@export var visualiser: StyleBoxTexture
+@export var app_window: SubViewport
 
 var write_enabled = false
 # used when the code still needs controll after writing
@@ -8,6 +10,8 @@ var write_locked = false
 var previous_cahrecter = ""
 
 var email_index = 0
+var email_death = false
+var email_death_debounce = false
 
 var task_index = -1
 var task_mode = false
@@ -16,26 +20,46 @@ var task_requim_index = 0
 var task_failed = false
 var task_done = false
 
+var app_index = -1
+var app_curent = null
+var app_node = null
+
+var download_downloading = false
+var download_module_index = 0
+
 func start() -> void:
 	diologue(0)
 	console.done.connect(stopWriting)
 
 func _process(delta):
-	var curent_text = detectKeyboard()
-	if previous_cahrecter == curent_text: return
-	previous_cahrecter = curent_text
-	write(curent_text)
-	checkSpecial()
+	if email_death:
+		if email_death_debounce: return
+		email_death_debounce = true
+		setHand("explosion_pre")
+	else:
+		var curent_text = detectKeyboard()
+		if previous_cahrecter == curent_text: return
+		previous_cahrecter = curent_text
+		write(curent_text)
+		checkSpecial()
 
 func write(p_string: String) -> void:
 	if not write_enabled: return
 	console.addCharecter(p_string)
 
 func stopWriting() -> void:
-	if write_locked:
-		taskWrite()
+	if email_death:
+		setHand("explosion_aft")
+		await get_tree().create_timer(0.5).timeout
+		get_tree().reload_current_scene()
 	else:
-		newLine()
+		if write_locked:
+			#Writing chains
+			if task_mode: taskWrite()
+			elif download_downloading: downloadChain()
+			# As failsafe
+			else: newLine()
+		else: newLine()
 
 func newLine() -> void:
 	if task_mode:
@@ -74,11 +98,13 @@ func checkSpecial() -> void:
 						write_enabled = false
 						console.addNewLine()
 						taskWrite()
+						print("FAILED")
 					elif lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
 						task_requim_index += 1
 						write_enabled = false
 						console.addNewLine()
 						taskWrite()
+						print("YESS")
 				return
 	else:
 		match console.getLast(0):
@@ -98,6 +124,7 @@ func checkSpecial() -> void:
 				console.addNewLine()
 				email(email_index)
 				task_index = Diologue.getEmail(email_index)["Task"]
+				app_index = Diologue.getEmail(email_index)["App"]
 				task_requim_index = 0
 			"TASK":
 				console.addNewLine()
@@ -113,6 +140,53 @@ func checkSpecial() -> void:
 					$Tttr1t.play()
 				console.addNewLine()
 				newLine()
+			"DOWN":
+				console.addNewLine()
+				if app_curent:
+					write_enabled = false
+					console.addText("Memmory slot full x-x\nPlease delete previos app before downloading\n")
+				else:
+					app_curent = Diologue.getApp(app_index)
+					write_enabled = false
+					write_locked = true
+					download_downloading = true
+					download_module_index = 0
+					console.addText(
+						"Downloading: "+app_curent["Name"]+
+						"\nSize:"+app_curent["Size"]+
+						"\nDownloading... please wait!\n")
+			"APP":
+				console.addNewLine()
+				if app_curent:
+					if not app_node:
+						write_enabled = false
+						console.addText("RIGHT AWAY (tip: use CLEAR)\n")
+						app_node = app_curent["Scene"].instantiate()
+						app_window.add_child(app_node)
+					else:
+						write_enabled = false
+						console.addText("App already open.. exit previous app\n")
+				else:
+					write_enabled = false
+					console.addText("No app found... XXUXX\n")
+			"CLOSE":
+				console.addNewLine()
+				if app_node:
+					app_node.queue_free()
+					write_enabled = false
+					console.addText("Bye bye appy !-!\n")
+				else:
+					write_enabled = false
+					console.addText("No open app found !DD\n")
+			"DELETE":
+				console.addNewLine()
+				if app_curent:
+					write_enabled = false
+					app_curent = null
+					console.addText("App disposed of, have wonderful day ;PP\n")
+				else:
+					write_enabled = false
+					console.addText("No app found to satisfy my hunger....\n")
 			_:
 				return
 
@@ -153,60 +227,193 @@ func email(p_index: int) -> void:
 	write_enabled = false
 	if task_done:
 		if task_failed:
-			console.addText(task_curent["Succes"])
-		else:
+			if console.getMode(): console.fastModeToggle()
 			console.addText(task_curent["Fail"])
+			email_death = true
+		else:
+			console.addText(task_curent["Succes"])
+			email_index += 1
+			task_done = false
 	else:
 		console.addText(Diologue.getEmail(p_index)["Content"])
 
+func downloadChain() -> void:
+	if download_module_index > app_curent["Modules"].size() - 1:
+		download_downloading = false
+		write_locked = false
+		return
+	if download_module_index == app_curent["Modules"].size() - 1:
+		download_downloading = false
+		write_locked = false
+	console.addText(app_curent["Modules"][download_module_index]+"\t\t [#####]-[#####]=[#####]-[#####] -+_ DONE\n")
+	download_module_index += 1
+
 func detectKeyboard() -> String:
 	# others
-	if Input.is_key_pressed(KEY_SPACE): return " "
-	if Input.is_key_pressed(KEY_ENTER): return " ENTER"
+	if Input.is_key_pressed(KEY_SPACE): 
+		setHand("SPACE")
+		return " "
+	if Input.is_key_pressed(KEY_ENTER): 
+		setHand("YAY")
+		return " ENTER"
 	
 	# keyboard
-	if Input.is_key_pressed(KEY_Q): return "Q"
-	if Input.is_key_pressed(KEY_W): return "W"
-	if Input.is_key_pressed(KEY_E): return "E"
-	if Input.is_key_pressed(KEY_R): return "R"
-	if Input.is_key_pressed(KEY_T): return "T"
-	if Input.is_key_pressed(KEY_Y): return "Y"
-	if Input.is_key_pressed(KEY_U): return "U"
-	if Input.is_key_pressed(KEY_I): return "I"
-	if Input.is_key_pressed(KEY_O): return "O"
-	if Input.is_key_pressed(KEY_P): return "P"
-	if Input.is_key_pressed(KEY_A): return "A"
-	if Input.is_key_pressed(KEY_S): return "S"
-	if Input.is_key_pressed(KEY_D): return "D"
-	if Input.is_key_pressed(KEY_F): return "F"
-	if Input.is_key_pressed(KEY_G): return "G"
-	if Input.is_key_pressed(KEY_H): return "H"
-	if Input.is_key_pressed(KEY_J): return "J"
-	if Input.is_key_pressed(KEY_K): return "K"
-	if Input.is_key_pressed(KEY_L): return "L"
-	if Input.is_key_pressed(KEY_Z): return "Z"
-	if Input.is_key_pressed(KEY_X): return "X"
-	if Input.is_key_pressed(KEY_C): return "C"
-	if Input.is_key_pressed(KEY_V): return "V"
-	if Input.is_key_pressed(KEY_B): return "B"
-	if Input.is_key_pressed(KEY_N): return "N"
-	if Input.is_key_pressed(KEY_M): return "M"
+	if Input.is_key_pressed(KEY_Q): 
+		setHand("Q")
+		return "Q"
+	if Input.is_key_pressed(KEY_W): 
+		setHand("W")
+		return "W"
+	if Input.is_key_pressed(KEY_E): 
+		setHand("E")
+		return "E"
+	if Input.is_key_pressed(KEY_R): 
+		setHand("R")
+		return "R"
+	if Input.is_key_pressed(KEY_T): 
+		setHand("T")
+		return "T"
+	if Input.is_key_pressed(KEY_Y): 
+		setHand("Y")
+		return "Y"
+	if Input.is_key_pressed(KEY_U): 
+		setHand("U")
+		return "U"
+	if Input.is_key_pressed(KEY_I): 
+		setHand("I")
+		return "I"
+	if Input.is_key_pressed(KEY_O): 
+		setHand("O")
+		return "O"
+	if Input.is_key_pressed(KEY_P): 
+		setHand("P")
+		return "P"
+	if Input.is_key_pressed(KEY_A): 
+		setHand("A")
+		return "A"
+	if Input.is_key_pressed(KEY_S): 
+		setHand("S")
+		return "S"
+	if Input.is_key_pressed(KEY_D): 
+		setHand("D")
+		return "D"
+	if Input.is_key_pressed(KEY_F): 
+		setHand("F")
+		return "F"
+	if Input.is_key_pressed(KEY_G): 
+		setHand("G")
+		return "G"
+	if Input.is_key_pressed(KEY_H): 
+		setHand("H")
+		return "H"
+	if Input.is_key_pressed(KEY_J): 
+		setHand("J")
+		return "J"
+	if Input.is_key_pressed(KEY_K): 
+		setHand("K")
+		return "K"
+	if Input.is_key_pressed(KEY_L): 
+		setHand("L")
+		return "L"
+	if Input.is_key_pressed(KEY_Z): 
+		setHand("Z")
+		return "Z"
+	if Input.is_key_pressed(KEY_X): 
+		setHand("X")
+		return "X"
+	if Input.is_key_pressed(KEY_C): 
+		setHand("C")
+		return "C"
+	if Input.is_key_pressed(KEY_V): 
+		setHand("V")
+		return "V"
+	if Input.is_key_pressed(KEY_B): 
+		setHand("B")
+		return "B"
+	if Input.is_key_pressed(KEY_N): 
+		setHand("N")
+		return "N"
+	if Input.is_key_pressed(KEY_M): 
+		setHand("M")
+		return "M"
 
 	# numbers
-	if Input.is_key_pressed(KEY_1): return "1"
-	if Input.is_key_pressed(KEY_2): return "2"
-	if Input.is_key_pressed(KEY_3): return "3"
-	if Input.is_key_pressed(KEY_4): return "4"
-	if Input.is_key_pressed(KEY_5): return "5"
-	if Input.is_key_pressed(KEY_6): return "6"
-	if Input.is_key_pressed(KEY_7): return "7"
-	if Input.is_key_pressed(KEY_8): return "8"
-	if Input.is_key_pressed(KEY_9): return "9"
-	if Input.is_key_pressed(KEY_0): return "0"
+	if Input.is_key_pressed(KEY_1): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "1"
+	if Input.is_key_pressed(KEY_2): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "2"
+	if Input.is_key_pressed(KEY_3): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "3"
+	if Input.is_key_pressed(KEY_4): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "4"
+	if Input.is_key_pressed(KEY_5): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "5"
+	if Input.is_key_pressed(KEY_6): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "6"
+	if Input.is_key_pressed(KEY_7): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "7"
+	if Input.is_key_pressed(KEY_8): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "8"
+	if Input.is_key_pressed(KEY_9): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "9"
+	if Input.is_key_pressed(KEY_0): 
+		if randi_range(0,1) == 0:
+			setHand("IDK")
+		else:
+			setHand("IDK2")
+		return "0"
 
 	# directions
-	if Input.is_key_pressed(KEY_LEFT): return "LEFT"
-	if Input.is_key_pressed(KEY_RIGHT): return "RIGHT"
-	if Input.is_key_pressed(KEY_UP): return "UP"
-	if Input.is_key_pressed(KEY_DOWN): return "DOWN"
+	if Input.is_key_pressed(KEY_LEFT): 	
+		setHand("LEFT")
+		return "LEFT"
+	if Input.is_key_pressed(KEY_RIGHT): 
+		setHand("RIGHT")
+		return "RIGHT"
+	if Input.is_key_pressed(KEY_UP): 	
+		setHand("UP")
+		return "UP"
+	if Input.is_key_pressed(KEY_DOWN): 	
+		setHand("DOWN")
+		return "DOWN"
+	setHand("IDLE")
 	return ""
+
+func setHand(p_name:String) -> void:
+	visualiser.texture = load("res://assets/Keyboard/"+p_name.to_lower()+".png")

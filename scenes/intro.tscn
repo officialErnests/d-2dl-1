@@ -1,10 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=21 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
 [ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
 [ext_resource type="Script" uid="uid://bidak4saascfr" path="res://scripts/main.gd" id="2_i2l1n"]
 [ext_resource type="Script" uid="uid://dobon3t2nwhdp" path="res://scripts/ready/color_rect.gd" id="2_yjqpq"]
+[ext_resource type="Texture2D" uid="uid://crp0nrid44cjd" path="res://assets/Keyboard/yay.png" id="3_0naf5"]
+[ext_resource type="Texture2D" uid="uid://cnhoaldtru6ti" path="res://assets/bg.png" id="3_es01l"]
 [ext_resource type="AudioStream" uid="uid://jejakfjfjcgq" path="res://notsomusic/TTTR1T.mp3" id="3_wfs7u"]
+[ext_resource type="Shader" uid="uid://dp7gyddhymp4o" path="res://shaders/whiter.gdshader" id="8_bu1yb"]
 
 [sub_resource type="Animation" id="Animation_ioskq"]
 length = 0.001
@@ -269,9 +272,33 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_yjqpq"]
 font_size = 76
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wfs7u"]
+texture = ExtResource("3_0naf5")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wfs7u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i2l1n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272cy"]
+shader = ExtResource("8_bu1yb")
+shader_parameter/red = 1.0
+shader_parameter/green = 1.0
+shader_parameter/blue = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bu1yb"]
+texture = ExtResource("3_es01l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bu1yb"]
+shader = ExtResource("8_bu1yb")
+shader_parameter/red = 1.0
+shader_parameter/green = 0.0
+shader_parameter/blue = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1qkj"]
+shader = ExtResource("8_bu1yb")
+shader_parameter/red = 0.0
+shader_parameter/green = 1.0
+shader_parameter/blue = 1.0
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -358,16 +385,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 1, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="Main" type="ColorRect" parent="Game"]
 offset_right = 360.0
 offset_bottom = 360.0
-color = Color(0, 0, 0, 1)
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
-[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console")]
+[node name="Minigames" type="SubViewportContainer" parent="Game/Main"]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 360.0
+
+[node name="SubViewport" type="SubViewport" parent="Game/Main/Minigames"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console", "app_window")]
 script = ExtResource("2_i2l1n")
 console = NodePath("../Console")
+visualiser = SubResource("StyleBoxTexture_wfs7u")
+app_window = NodePath("../Minigames/SubViewport")
 
 [node name="Tttr1t" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
 stream = ExtResource("3_wfs7u")
@@ -381,6 +421,7 @@ offset_top = 10.0
 offset_right = 350.0
 offset_bottom = 350.0
 theme_override_colors/default_color = Color(0, 1, 1, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/normal_font_size = 10
 theme_override_font_sizes/bold_font_size = 12
 theme_override_font_sizes/italics_font_size = 11
@@ -403,20 +444,25 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_yjqpq")
 
-[node name="Minigames" type="SubViewportContainer" parent="Game/Main"]
-visible = false
-layout_mode = 0
-offset_right = 360.0
+[node name="room_bg" type="Panel" parent="Game"]
+material = SubResource("ShaderMaterial_272cy")
+offset_left = 360.0
+offset_right = 640.0
 offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bu1yb")
 
-[node name="SubViewport" type="SubViewport" parent="Game/Main/Minigames"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(360, 360)
-render_target_update_mode = 0
+[node name="visualiser" type="Panel" parent="Game"]
+material = SubResource("ShaderMaterial_bu1yb")
+offset_left = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wfs7u")
 
-[node name="Other screen" type="Label" parent="Game"]
-offset_left = 468.0
-offset_top = 139.0
-offset_right = 537.0
-offset_bottom = 214.0
+[node name="visualiser2" type="Panel" parent="Game"]
+material = SubResource("ShaderMaterial_t1qkj")
+offset_left = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+scale = Vector2(0.975, 0.975)
+pivot_offset = Vector2(280, 360)
+theme_override_styles/panel = SubResource("StyleBoxTexture_wfs7u")

@@ -18,6 +18,7 @@ var diologue = [
 
 	\tx__--// APP \\\\--__x
 	\t\tAPP\t\t\t\t\tOPENS DOWNLOADED APP
+	\t\tCLOSE\t\t\t\t\tCLOSES OPENED APP
 	\t\tDELETE\t\t\tDELETES APP
 	\t\tDOWN\t\t\tDOWNLOADS NEWEST APP\n",
 	#2 - exit
@@ -51,7 +52,8 @@ var emails = [
 		[-] - F0r n0w 0p3n t45k5 - [-]
 
 		~ l3 h1gg3r 3mploy3 #3941123 (4k4 gr4y on3)\n",
-		"Task": 0
+		"Task": 0,
+		"App": 0
 	},
 	{
 		"Content": "Hi, noob.corp.cool
@@ -59,12 +61,40 @@ var emails = [
 		like.. i have no idea how to touch arrows..
 		I just code i can't play.. PLS PLS PLS HELP
 		
-		+_ Cool programmer _+",
-		"Task": 1
+		+_ Cool programmer _+\n",
+		"Task": 1,
+		"App": 1
 	}
 ]
 
 var tasks = [
+	{
+		"Name": "C0NGR4T5 0n 0p3n1ng th15 :DD\n",
+		"Requims": [
+			{
+				"Text": "D0 y0u 53ll y0ur [i]UNG0DLY 50UL[/i] t0 th15 noob.corp.c00l",
+				"Prompt": "Y - y35 || n0 - N\n",
+				"Expected": "Y",
+				"NoNo": "N"
+			},
+			{
+				"Text": "G0 D0WNL04D APP",
+				"Prompt": "|| EXIT ||\n",
+				"Expected": "EXIT",
+				"NoNo": "NUHUH"
+			},
+			{
+				"Text": "?? D035 17 0P3N UP",
+				"Prompt": "Y - y35 || n0 - N\n",
+				"Expected": "Y",
+				"NoNo": "N"
+			}
+		],
+		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
+		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
+		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
+		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D\n"
+	},
 	{
 		"Name": "C0NGR4T5 0n 0p3n1ng th15 :DD\n",
 		"Requims": [
@@ -84,7 +114,19 @@ var tasks = [
 		"Fail": "\t00P5135 wr0ng 4n5w3r5, l0lz135
 		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
 		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
-		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D"
+		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D\n"
+	}
+]
+
+var apps = [
+	{
+		"Name": "73571NG 4PP",
+		"Size": "4.0mb",
+		"Modules": [
+			"Core",
+			"Text_display"
+		],
+		"Scene": preload("res://scenes/apps/TestApp.tscn")
 	}
 ]
 
@@ -96,3 +138,6 @@ func getDiologue(p_index: int) -> String:
 
 func getEmail(p_index: int) -> Dictionary:
 	return emails[p_index]
+
+func getApp(p_index: int) -> Dictionary:
+	return apps[p_index]

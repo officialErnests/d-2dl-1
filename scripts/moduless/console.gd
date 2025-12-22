@@ -15,7 +15,7 @@ func addNewLine() -> void:
 	text += "\n"
 
 func addText(p_text: String) -> void:
-	visible_characters = text.length()-1
+	visible_characters = get_parsed_text().length()
 	text += p_text
 	showText()
 
@@ -42,7 +42,7 @@ func getLast(p_offset) -> String:
 	return result.reverse()
 
 func showText() -> void:
-	if text.length() > visible_characters:
+	if get_parsed_text().length() > visible_characters:
 		visible_characters += 1
 		await get_tree().create_timer(text_delay).timeout
 		showText()

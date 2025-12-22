@@ -3,11 +3,15 @@ extends Node
 @export var console: Control
 
 var write_enabled = false
+# used when the code still needs controll after writing
 var write_locked = false
 var previous_cahrecter = ""
+var task_index = -1
 var task_mode = false
 var task_curent
 var task_requim_index = 0
+var task_failed = false
+var email_index = 0
 
 func start() -> void:
 	diologue(0)
@@ -32,12 +36,13 @@ func stopWriting() -> void:
 
 func newLine() -> void:
 	if task_mode:
-		console.addCharecter("Noob-o-task->> ")
+		console.addCharecter("[b]Noob-o-task->>[/b] ")
 	else:
-		console.addCharecter("Noob->> ")
+		console.addCharecter("[b]Noob->>[/b] ")
 	write_enabled = true
 	
 func checkSpecial() -> void:
+	if not write_enabled: return
 	if task_mode:
 		match console.getLast(0):
 			"HELP":
@@ -50,11 +55,38 @@ func checkSpecial() -> void:
 				console.clearText()
 				newLine()
 			"EXIT":
-				pass
+				console.addNewLine()
+				write_enabled = false
+				write_locked = false
+				taskExit()
 			"REPEAT":
 				console.addNewLine()
 				taskWrite()
 			_:
+				var lastinput = console.getLast(0)
+				if lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
+					print("A:" + lastinput + task_curent["Requims"][task_requim_index]["NoNo"]);
+					task_failed = true
+					task_requim_index += 1
+					write_enabled = false
+					console.addNewLine()
+					if task_requim_index >= task_curent["Requims"].size(): 
+						write_enabled = false
+						write_locked = false
+						taskExit()
+					else:
+						taskWrite()
+				elif lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
+					print("B:" + lastinput + task_curent["Requims"][task_requim_index]["Expected"]);
+					task_requim_index += 1
+					write_enabled = false
+					console.addNewLine()
+					if task_requim_index >= task_curent["Requims"].size(): 
+						write_enabled = false
+						write_locked = false
+						taskExit()
+					else:
+						taskWrite()
 				return
 	else:
 		match console.getLast(0):
@@ -70,34 +102,55 @@ func checkSpecial() -> void:
 			"CLEAR":
 				console.clearText()
 				newLine()
-			"EMAIL":
+			"NMAIL":
 				console.addNewLine()
-				email(0)
+				email(email_index)
+				task_index = Diologue.getEmail(email_index)["Task"]
+				task_requim_index = 0
 			"TASK":
 				console.addNewLine()
-				task(0)
+				task(task_index)
+			"MUSIC":
+				if $Tttr1t.playing:
+					$Tttr1t.stop()
+				else:
+					$Tttr1t.play()
+				console.addNewLine()
+				newLine()
 			_:
 				return
 
 func task(p_index) -> void:
-	task_curent = Diologue.getTask(0)
+	if p_index == -1:
+		write_enabled = false
+		console.addText("NO TASK FOUND\nSELF DESTRUCT T-10\nT-9..........\nT-8..........\nT-7..........\nT-6..........\nT-5..........\nT-4..........\nT-3..........\nT-2..........\nT-1..........\n.................................................\nJk ;PP\n")
+		return
+	console.clearText()
+	task_curent = Diologue.getTask(p_index)
 	task_mode = true
 	write_enabled = false
 	write_locked = true
 	console.addNewLine()
-	task_requim_index = 0
-	console.addText("--==|| Task mode ,,--.. EXIT [to] EXIT ||==--\n"+task_curent["Name"])
+	console.addText("[b]--==|| Task mode ,,--.. EXIT [to] EXIT ||==--[/b]\n"+task_curent["Name"])
 
 func taskWrite() -> void:
+	write_enabled = false
 	write_locked = false
-	console.addText(task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
+	console.addText("[b]"+str(task_requim_index+1) + "}{--= Numero of tasssky =--}{"+ str(task_requim_index+1)+ "[/b]\n"+task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
 
+func taskExit() -> void:
+	console.clearText()
+	task_mode = false
+	console.addText("--==|| EXIIITED Task mode EXIIITED ||==--\n")
+	newLine()
 
 func diologue(p_index: int) -> void:
+	write_enabled = false
 	console.addText(Diologue.getDiologue(p_index))
 
 func email(p_index: int) -> void:
-	console.addText(Diologue.getEmail(p_index))
+	write_enabled = false
+	console.addText(Diologue.getEmail(p_index)["Content"])
 
 func detectKeyboard() -> String:
 	# others

@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=13 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
 [ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
 [ext_resource type="Script" uid="uid://bidak4saascfr" path="res://scripts/main.gd" id="2_i2l1n"]
 [ext_resource type="Script" uid="uid://dobon3t2nwhdp" path="res://scripts/ready/color_rect.gd" id="2_yjqpq"]
+[ext_resource type="AudioStream" uid="uid://jejakfjfjcgq" path="res://notsomusic/TTTR1T.mp3" id="3_wfs7u"]
 
 [sub_resource type="Animation" id="Animation_ioskq"]
 length = 0.001
@@ -368,6 +369,11 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_i2l1n")
 console = NodePath("../Console")
 
+[node name="Tttr1t" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("3_wfs7u")
+volume_db = -15.0
+parameters/looping = true
+
 [node name="Console" type="RichTextLabel" parent="Game/Main"]
 layout_mode = 0
 offset_left = 10.0
@@ -376,6 +382,7 @@ offset_right = 350.0
 offset_bottom = 350.0
 theme_override_colors/default_color = Color(0, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wfs7u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_i2l1n")
 bbcode_enabled = true

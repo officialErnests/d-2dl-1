@@ -10,7 +10,7 @@ var diologue = [
 	\t\tENTER\t\t\t\tCLEARS COMMAND
 	\t\tCLEAR\t\t\t\tCLEARS COMMAND FR FR
 	\t\tMUSIC\t\t\t\tTOGGLES NOISE
-	\t\tFAST\t\t\t\tSPEEDS UP BOMB TIMER XDD
+	\t\tFAST\t\t\t\tSPEEDS UP TERMINAL
 	\t\tQUIT\t\t\t\tQUITS COMPUTER AND EXPLODES
 
 	\tx__--// JOB \\\\--__x
@@ -121,8 +121,8 @@ var tasks = [
 				"Possible": true
 			},
 			{
-				"Text": "G0 D0WNL04D APP",
-				"Prompt": "|| EXIT || DOWN || APP || C 70 C0N71NU3\n",
+				"Text": "G0 D0WNL04D APP\nTYP3: EXIT -> DOWNLOAD -> APP -> CLOSE",
+				"Prompt": "C - C0N71NU3\n",
 				"Expected": "C",
 				"NoNo": "NUHUH",
 				"Possible": true
@@ -146,7 +146,7 @@ var tasks = [
 		*pr0c33d5 t0 4cc1d3nt4lly d3t0n4t3 l3 b0mb*\n
 		00P51355...................................................................................................................................................................................................................54Y_BY3BY3BY3BBYY33BBBYYY333-----------______________________\n",
 		"Succes": "W3lc0m3 t0 y0ur n3w f4m1ly ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;D
-		(0N3 L457 71P,,,.. Y0U C4N CL053 4PP W17# -==CLOSE==-)\n"
+		->> 4L50 - NMAIL - N3W T45K\n"
 	},
 #* PROGRAMMER ------------------------------------------
 	#1

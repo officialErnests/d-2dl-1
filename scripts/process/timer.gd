@@ -5,7 +5,6 @@ var stopped = false
 
 func start() -> void:
 	startTime = Time.get_ticks_msec() + 60000
-	print(Time.get_ticks_msec())
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if stopped: return

@@ -1,6 +1,7 @@
 extends Node
 
 @export var console: Control
+@export var console2: Control
 @export var visualiser: StyleBoxTexture
 @export var app_window: SubViewport
 @export var timer: Label
@@ -38,6 +39,7 @@ var game_over = false
 func start() -> void:
 	diologue(0)
 	console.done.connect(stopWriting)
+	console2.done.connect(stopWriting)
 	deaths.startTime = Time.get_ticks_msec()
 	timer.start()
 	timer.death.connect(death)
@@ -61,7 +63,10 @@ func _process(delta):
 
 func write(p_string: String) -> void:
 	if not write_enabled: return
-	console.addCharecter(p_string)
+	if task_mode:
+		console2.addCharecter(p_string)
+	else:
+		console.addCharecter(p_string)
 
 func stopWriting() -> void:
 	if email_death:
@@ -80,6 +85,7 @@ func stopWriting() -> void:
 		else:
 			console.addSlowText("\n.......................................\nYou blown up\n............................................................\nBut what is this miracle, shining light\nThen you blink and open your eyes once more.\n")
 	else:
+		print(write_locked)
 		if write_locked:
 			#Writing chains
 			if task_mode: taskWrite()
@@ -90,7 +96,7 @@ func stopWriting() -> void:
 
 func newLine() -> void:
 	if task_mode:
-		console.addCharecter("[b]Noob-o-task->>[/b] ")
+		console2.addCharecter("[b]Noob-o-task->>[/b] ")
 	else:
 		console.addCharecter("[b]Noob->>[/b] ")
 	write_enabled = true
@@ -136,34 +142,34 @@ func checkSpecial() -> void:
 			"RESET":
 				get_tree().reload_current_scene()
 	if task_mode:
-		match console.getLast(0):
+		match console2.getLast(0):
 			"HELP":
-				console.addNewLine()
+				console2.addNewLine()
 				diologue(5)
 			"ENTER":
-				console.addNewLine()
+				console2.addNewLine()
 				newLine()
 			"CLEAR":
-				console.clearText()
+				console2.clearText()
 				newLine()
 			"EXIT":
-				console.addNewLine()
+				console2.addNewLine()
 				write_enabled = false
 				write_locked = false
 				taskExit()
 			"REPEAT":
-				console.addNewLine()
+				console2.addNewLine()
 				taskWrite()
 			"QUIT":
 				get_tree().quit()
 			_:
-				var lastinput = console.getLast(0)
+				var lastinput = console2.getLast(0)
 				if task_requim_index < task_curent["Requims"].size() and email_opened: 
 					if lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
 						task_requim_index += 1
 						timer.addTime(TIME_PER_TASK)
 						write_enabled = false
-						console.addNewLine()
+						console2.addNewLine()
 						taskWrite()
 					elif lastinput == task_curent["Requims"][task_requim_index]["NoNo"]:
 						if task_curent["Requims"][task_requim_index]["Possible"]:
@@ -172,7 +178,7 @@ func checkSpecial() -> void:
 						task_requim_index += 1
 						write_enabled = false
 						timer.addTime(TIME_PER_TASK)
-						console.addNewLine()
+						console2.addNewLine()
 						taskWrite()
 				return
 	else:
@@ -202,15 +208,21 @@ func checkSpecial() -> void:
 				task(task_index)
 			"FAST":
 				console.fastModeToggle()
+				console2.fastModeToggle()
 				console.addNewLine()
-				newLine()
+				write_enabled = false
+				if console.getMode():
+					console.addText("FAST MODE -== ON\n")
+				else:
+					console.addText("FAST MODE -== OFF\n")
 			"MUSIC":
+				console.addNewLine()
 				if $Tttr1t.playing:
 					$Tttr1t.stop()
+					console.addText("MUSIC -== OFF\n")
 				else:
 					$Tttr1t.play()
-				console.addNewLine()
-				newLine()
+					console.addText("MUSIC -== ON\n")
 			"DOWNLOAD":
 				console.addNewLine()
 				if app_curent:
@@ -278,27 +290,26 @@ func task(p_index) -> void:
 		write_enabled = false
 		console.addText("NO TASK FOUND\nSELF DESTRUCT T-10\nT-9..........\nT-8..........\nT-7..........\nT-6..........\nT-5..........\nT-4..........\nT-3..........\nT-2..........\nT-1..........\n.................................................\nJk ;PP\n")
 		return
-	console.clearText()
 	task_curent = Diologue.getTask(p_index)
 	task_mode = true
 	write_enabled = false
 	write_locked = true
-	console.addNewLine()
-	console.addText("[b]--==|| Task mode ,,--.. EXIT [to] EXIT ||==--[/b]\n"+task_curent["Name"])
+	console2.addNewLine()
+	console2.addText("--==|| Task mode ,,--.. EXIT [to] EXIT ||==--\n"+task_curent["Name"])
 
 func taskWrite() -> void:
+	print("WRITE TASK")
 	if task_requim_index >= task_curent["Requims"].size() or not email_opened: 
 		task_done = true
 		write_enabled = false
 		write_locked = false
-		console.addText("All tasks done ;PP\nPlease proceed to check [i]tm(NMAIL)[/i]\n")
+		console2.addText("All tasks done ;PP\nPlease proceed to check [i]tm(NMAIL)[/i]\n")
 		return
 	write_enabled = false
 	write_locked = false
-	console.addText("[b]"+str(task_requim_index+1) + "}{--= Numero of tasssky =--}{"+ str(task_requim_index+1)+ "[/b]\n"+task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
+	console2.addText("[b]"+str(task_requim_index+1) + "}{--= Numero of tasssky =--}{"+ str(task_requim_index+1)+ "[/b]\n"+task_curent["Requims"][task_requim_index]["Text"]+"\n"+task_curent["Requims"][task_requim_index]["Prompt"])
 
 func taskExit() -> void:
-	console.clearText()
 	task_mode = false
 	console.addText("--==|| EXIIITED Task mode EXIIITED ||==--\n")
 
@@ -338,6 +349,7 @@ func email(p_index: int) -> void:
 		email_opened = true
 
 func downloadChain() -> void:
+	print("DOWNLOAD")
 	if download_module_index > app_curent["Modules"].size() - 1:
 		download_downloading = false
 		write_locked = false

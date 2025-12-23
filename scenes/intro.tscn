@@ -411,9 +411,10 @@ handle_input_locally = false
 size = Vector2i(360, 360)
 render_target_update_mode = 4
 
-[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console", "app_window", "timer")]
+[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console", "console2", "app_window", "timer")]
 script = ExtResource("2_i2l1n")
-console = NodePath("../Console")
+console = NodePath("../HBoxContainer/Console")
+console2 = NodePath("../HBoxContainer/Console2")
 visualiser = SubResource("StyleBoxTexture_wfs7u")
 app_window = NodePath("../Minigames/SubViewport")
 timer = NodePath("../../Timer")
@@ -423,17 +424,37 @@ stream = ExtResource("3_wfs7u")
 volume_db = -15.0
 parameters/looping = true
 
-[node name="Console" type="RichTextLabel" parent="Game/Main"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/Main"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 350.0
 offset_bottom = 350.0
+
+[node name="Console" type="RichTextLabel" parent="Game/Main/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
 theme_override_colors/default_color = Color(0, 1, 1, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/bold_font_size = 12
-theme_override_font_sizes/italics_font_size = 11
+theme_override_font_sizes/normal_font_size = 7
+theme_override_font_sizes/bold_font_size = 9
+theme_override_font_sizes/italics_font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wfs7u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i2l1n")
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+scroll_following_visible_characters = true
+script = ExtResource("2_4bx60")
+
+[node name="Console2" type="RichTextLabel" parent="Game/Main/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 7
+theme_override_font_sizes/bold_font_size = 9
+theme_override_font_sizes/italics_font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wfs7u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_i2l1n")
 bbcode_enabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=22 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
 [ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cnhoaldtru6ti" path="res://assets/bg.png" id="3_es01l"]
 [ext_resource type="AudioStream" uid="uid://jejakfjfjcgq" path="res://notsomusic/TTTR1T.mp3" id="3_wfs7u"]
 [ext_resource type="Shader" uid="uid://dp7gyddhymp4o" path="res://shaders/whiter.gdshader" id="8_bu1yb"]
+[ext_resource type="Script" uid="uid://bpmbwqu3gr551" path="res://scripts/process/timer.gd" id="9_t1qkj"]
 
 [sub_resource type="Animation" id="Animation_ioskq"]
 length = 0.001
@@ -410,11 +411,12 @@ handle_input_locally = false
 size = Vector2i(360, 360)
 render_target_update_mode = 4
 
-[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console", "app_window")]
+[node name="GameManager" type="Node" parent="Game/Main" node_paths=PackedStringArray("console", "app_window", "timer")]
 script = ExtResource("2_i2l1n")
 console = NodePath("../Console")
 visualiser = SubResource("StyleBoxTexture_wfs7u")
 app_window = NodePath("../Minigames/SubViewport")
+timer = NodePath("../../Timer")
 
 [node name="Tttr1t" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
 stream = ExtResource("3_wfs7u")
@@ -475,11 +477,13 @@ pivot_offset = Vector2(280, 360)
 theme_override_styles/panel = SubResource("StyleBoxTexture_wfs7u")
 
 [node name="Timer" type="Label" parent="Game"]
-offset_left = 360.0
-offset_top = 200.99998
-offset_right = 580.0
-offset_bottom = 319.0
+offset_left = 390.0
+offset_top = 193.99998
+offset_right = 610.0
+offset_bottom = 312.0
+rotation = 1.5707964
 scale = Vector2(0.18, 0.18)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 86
 text = "60:00"
+script = ExtResource("9_t1qkj")

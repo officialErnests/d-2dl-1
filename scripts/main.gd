@@ -3,7 +3,10 @@ extends Node
 @export var console: Control
 @export var visualiser: StyleBoxTexture
 @export var app_window: SubViewport
-# @export var timer
+@export var timer: Label
+
+@export var TIME_PER_TASK :=  10000
+@export var TIME_PER_MAIL :=  10000
 
 var write_enabled = false
 # used when the code still needs controll after writing
@@ -35,7 +38,14 @@ var game_over = false
 func start() -> void:
 	diologue(0)
 	console.done.connect(stopWriting)
-	deaths.startTime = Time.get_unix_time_from_system()
+	deaths.startTime = Time.get_ticks_msec()
+	timer.start()
+	timer.death.connect(death)
+
+func death():
+	timer.start()
+	console.addSlowText("KABOOOOOOOOM\nOut of time buddi ;-;")
+	email_death = true
 
 func _process(delta):
 	if email_death:
@@ -62,8 +72,13 @@ func stopWriting() -> void:
 		email_death = false
 		task_failed = false
 		deaths.deaths += 1
+		timer.start()
 		await get_tree().create_timer(0.5).timeout
-		console.addSlowText(".................................................\nYou exploded..\n..................................................\n BUT SUDENTLY, a bright light shined and you got back up\n")
+		timer.start()
+		if randi_range(0,1) -- 0:
+			console.addSlowText(".................................................\nYou exploded..\n..................................................\n BUT SUDENTLY, a bright light shined and you got back up\n")
+		else:
+			console.addSlowText("\n.......................................\nYou blown up\n............................................................\nBut what is this miracle, shining light\nThen you blink and open your eyes once more.\n")
 	else:
 		if write_locked:
 			#Writing chains
@@ -146,6 +161,7 @@ func checkSpecial() -> void:
 				if task_requim_index < task_curent["Requims"].size() and email_opened: 
 					if lastinput == task_curent["Requims"][task_requim_index]["Expected"]:
 						task_requim_index += 1
+						timer.addTime(TIME_PER_TASK)
 						write_enabled = false
 						console.addNewLine()
 						taskWrite()
@@ -155,6 +171,7 @@ func checkSpecial() -> void:
 							task_unhappy = task_curent["Requims"][task_requim_index]["Text"]
 						task_requim_index += 1
 						write_enabled = false
+						timer.addTime(TIME_PER_TASK)
 						console.addNewLine()
 						taskWrite()
 				return
@@ -298,10 +315,11 @@ func email(p_index: int) -> void:
 			email_death = true
 		else:
 			console.addText(task_curent["Succes"])
+			timer.addTime(TIME_PER_MAIL)
 			email_index += 1
 	else:
 		if Diologue.getEmailAmount() == p_index:
-			deaths.endTime = Time.get_unix_time_from_system()
+			deaths.endTime = Time.get_ticks_msec()
 			game_over = true
 			console.addSlowText("As you tried that.. nothing happened
 			The bomb stoped ticking

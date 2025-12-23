@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var text_delay = 0.0
+var text_delay = 0.1
 var can_type = false
 var fast_mode = false
 
@@ -55,7 +55,7 @@ func showText() -> void:
 		return
 	else:
 		if get_parsed_text().length() > visible_characters:
-			visible_characters += 1
+			visible_characters += 5
 			await get_tree().create_timer(text_delay).timeout
 			showText()
 		else:
@@ -64,7 +64,7 @@ func showText() -> void:
 
 func showTextSlow() -> void:
 	if get_parsed_text().length() > visible_characters:
-		visible_characters += 1
+		visible_characters += 5
 		await get_tree().create_timer(text_delay).timeout
 		showTextSlow()
 	else:

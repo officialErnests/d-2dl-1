@@ -84,6 +84,7 @@ func write(p_string: String) -> void:
 
 func stopWriting() -> void:
 	if email_death:
+		$Blowup.play()
 		setHand("explosion_aft")
 		email_death_debounce = false
 		write_enabled = false

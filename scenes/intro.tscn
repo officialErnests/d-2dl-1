@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bpckjdnjuocul"]
+[gd_scene load_steps=28 format=3 uid="uid://bpckjdnjuocul"]
 
 [ext_resource type="Script" uid="uid://bm6abbotuqkb8" path="res://scripts/ready/intro.gd" id="1_yjqpq"]
 [ext_resource type="Script" uid="uid://bgw65uyo3j6mi" path="res://scripts/moduless/console.gd" id="2_4bx60"]
@@ -7,8 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://crp0nrid44cjd" path="res://assets/Keyboard/yay.png" id="3_0naf5"]
 [ext_resource type="Texture2D" uid="uid://cnhoaldtru6ti" path="res://assets/bg.png" id="3_es01l"]
 [ext_resource type="AudioStream" uid="uid://jejakfjfjcgq" path="res://notsomusic/TTTR1T.mp3" id="3_wfs7u"]
+[ext_resource type="AudioStream" uid="uid://bt4rrcwoicor3" path="res://assets/Keyboard/sfx/click1.ogg" id="4_xwriy"]
+[ext_resource type="AudioStream" uid="uid://d2we84c3d34oq" path="res://assets/Keyboard/sfx/click2.ogg" id="5_u5myo"]
+[ext_resource type="AudioStream" uid="uid://crao77n3w6y6l" path="res://assets/Keyboard/sfx/click3.ogg" id="6_u05oh"]
+[ext_resource type="AudioStream" uid="uid://dgrfqiai55vc0" path="res://assets/Keyboard/sfx/click4.ogg" id="7_epycs"]
 [ext_resource type="Shader" uid="uid://dp7gyddhymp4o" path="res://shaders/whiter.gdshader" id="8_bu1yb"]
+[ext_resource type="AudioStream" uid="uid://xfmtqjkk1h6e" path="res://assets/Keyboard/sfx/click.ogg" id="8_ge50m"]
 [ext_resource type="Script" uid="uid://bpmbwqu3gr551" path="res://scripts/process/timer.gd" id="9_t1qkj"]
+[ext_resource type="AudioStream" uid="uid://cqk8du81dugoi" path="res://notsomusic/D4R2S.mp3" id="10_u5myo"]
 
 [sub_resource type="Animation" id="Animation_ioskq"]
 length = 0.001
@@ -419,9 +425,35 @@ visualiser = SubResource("StyleBoxTexture_wfs7u")
 app_window = NodePath("../Minigames/SubViewport")
 timer = NodePath("../../Timer")
 
+[node name="Click1" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("4_xwriy")
+volume_db = 10.0
+
+[node name="Click2" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("5_u5myo")
+volume_db = 10.0
+
+[node name="Click3" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("6_u05oh")
+volume_db = 10.0
+
+[node name="Click4" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("7_epycs")
+volume_db = 10.0
+
+[node name="Click" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("8_ge50m")
+volume_db = 10.0
+
 [node name="Tttr1t" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
 stream = ExtResource("3_wfs7u")
 volume_db = -15.0
+parameters/looping = true
+
+[node name="D4R2S" type="AudioStreamPlayer" parent="Game/Main/GameManager"]
+stream = ExtResource("10_u5myo")
+volume_db = -15.0
+autoplay = true
 parameters/looping = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Game/Main"]

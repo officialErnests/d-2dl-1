@@ -57,9 +57,23 @@ func _process(delta):
 	else:
 		var curent_text = detectKeyboard()
 		if previous_cahrecter == curent_text: return
+		if curent_text != "":randomKeyboardSFX()
 		previous_cahrecter = curent_text
 		write(curent_text)
 		checkSpecial()
+
+func randomKeyboardSFX():
+	match randi_range(0,4):
+		0:
+			$Click.play()
+		1:
+			$Click1.play()
+		2:
+			$Click2.play()
+		3:
+			$Click3.play()
+		4:
+			$Click4.play()
 
 func write(p_string: String) -> void:
 	if not write_enabled: return
@@ -217,11 +231,21 @@ func checkSpecial() -> void:
 					console.addText("FAST MODE -== OFF\n")
 			"MUSIC":
 				console.addNewLine()
+				if $D4R2S.playing:
+					$D4R2S.stop()
+					console.addText("MUSIC -== OFF\n")
+				else:
+					$D4R2S.play()
+					$Tttr1t.stop()
+					console.addText("MUSIC -== ON\n")
+			"CORUPTMUSIC":
+				console.addNewLine()
 				if $Tttr1t.playing:
 					$Tttr1t.stop()
 					console.addText("MUSIC -== OFF\n")
 				else:
 					$Tttr1t.play()
+					$D4R2S.stop()
 					console.addText("MUSIC -== ON\n")
 			"DOWNLOAD":
 				console.addNewLine()

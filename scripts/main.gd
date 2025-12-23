@@ -3,6 +3,7 @@ extends Node
 @export var console: Control
 @export var visualiser: StyleBoxTexture
 @export var app_window: SubViewport
+# @export var timer
 
 var write_enabled = false
 # used when the code still needs controll after writing
@@ -29,9 +30,12 @@ var app_node = null
 var download_downloading = false
 var download_module_index = 0
 
+var game_over = false
+
 func start() -> void:
 	diologue(0)
 	console.done.connect(stopWriting)
+	deaths.startTime = Time.get_unix_time_from_system()
 
 func _process(delta):
 	if email_death:
@@ -52,12 +56,13 @@ func write(p_string: String) -> void:
 func stopWriting() -> void:
 	if email_death:
 		setHand("explosion_aft")
-		await get_tree().create_timer(0.5).timeout
 		email_death_debounce = false
 		write_enabled = false
 		write_locked = false
 		email_death = false
 		task_failed = false
+		deaths.deaths += 1
+		await get_tree().create_timer(0.5).timeout
 		console.addSlowText(".................................................\nYou exploded..\n..................................................\n BUT SUDENTLY, a bright light shined and you got back up\n")
 	else:
 		if write_locked:
@@ -77,6 +82,44 @@ func newLine() -> void:
 	
 func checkSpecial() -> void:
 	if not write_enabled: return
+	if game_over:
+		match console.getLast(0):
+			"EXIT":
+				console.addNewLine()
+				diologue(randi_range(2,4))
+			"ENTER":
+				console.addNewLine()
+				newLine()
+			"HELP":
+				console.addNewLine()
+				diologue(1)
+			"CLEAR":
+				console.clearText()
+				newLine()
+			"FAST":
+				console.fastModeToggle()
+				console.addNewLine()
+				newLine()
+			"MUSIC":
+				if $Tttr1t.playing:
+					$Tttr1t.stop()
+				else:
+					$Tttr1t.play()
+				console.addNewLine()
+				newLine()
+			"CLOSE":
+				console.addNewLine()
+				if app_node:
+					app_node.queue_free()
+					write_enabled = false
+					console.addText("Bye bye appy !-!\n")
+				else:
+					write_enabled = false
+					console.addText("No open app found !DD\n")
+			"QUIT":
+				get_tree().quit()
+			"RESET":
+				get_tree().reload_current_scene()
 	if task_mode:
 		match console.getLast(0):
 			"HELP":
@@ -132,6 +175,7 @@ func checkSpecial() -> void:
 			"NMAIL":
 				console.addNewLine()
 				email(email_index)
+				if Diologue.getEmailAmount() == email_index: return
 				task_index = Diologue.getEmail(email_index)["Task"]
 				app_index = Diologue.getEmail(email_index)["App"]
 				task_done = false
@@ -203,6 +247,12 @@ func checkSpecial() -> void:
 					console.addText("No app found to satisfy my hunger....\n")
 			"QUIT":
 				get_tree().quit()
+			"RESET":
+				console.addNewLine()
+				write_enabled = false
+				console.addText("If you want to reset, please type NOWRESET\n")
+			"NOWRESET":
+				get_tree().reload_current_scene()
 			_:
 				return
 
@@ -250,6 +300,20 @@ func email(p_index: int) -> void:
 			console.addText(task_curent["Succes"])
 			email_index += 1
 	else:
+		if Diologue.getEmailAmount() == p_index:
+			deaths.endTime = Time.get_unix_time_from_system()
+			game_over = true
+			console.addSlowText("As you tried that.. nothing happened
+			The bomb stoped ticking
+			The computer buzzed softly..
+			As soon you stood up.. 
+			And finaly was free..
+			BUT THEN KABOOOOOOOOOOOOOOOOOm
+			U died XXDD
+			Welp, you did great!
+			You died "+ str(deaths.deaths) + "times
+			And did it in " + str(deaths.start - deaths.endTime) + "ms
+			And whenever you are ready to for another round just type RESET ;PP")
 		console.addText(Diologue.getEmail(p_index)["Content"])
 		email_opened = true
 

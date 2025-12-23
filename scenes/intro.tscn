@@ -473,3 +473,13 @@ offset_bottom = 360.0
 scale = Vector2(0.975, 0.975)
 pivot_offset = Vector2(280, 360)
 theme_override_styles/panel = SubResource("StyleBoxTexture_wfs7u")
+
+[node name="Timer" type="Label" parent="Game"]
+offset_left = 360.0
+offset_top = 200.99998
+offset_right = 580.0
+offset_bottom = 319.0
+scale = Vector2(0.18, 0.18)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "60:00"

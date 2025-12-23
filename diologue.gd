@@ -507,3 +507,6 @@ func getEmail(p_index: int) -> Dictionary:
 
 func getApp(p_index: int) -> Dictionary:
 	return apps[p_index]
+
+func getEmailAmount() -> int:
+	return emails.size()

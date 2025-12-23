@@ -1,12 +1,14 @@
 extends Label
 var startTime = 0
 signal death()
+var stopped = false
 
 func start() -> void:
-	startTime = Time.get_ticks_msec() + 20000
+	startTime = Time.get_ticks_msec() + 60000
 	print(Time.get_ticks_msec())
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if stopped: return
 	var time = str(floori((startTime - Time.get_ticks_msec())/10.0))
 	while time.length() < 4:
 		time = "0"+time
@@ -15,3 +17,7 @@ func _process(delta: float) -> void:
 		death.emit()
 func addTime(p_time_ms: int) -> void:
 	startTime += p_time_ms
+	startTime -= max(startTime - Time.get_ticks_msec() - 99000,0)
+
+func stops() -> void:
+	stopped = true

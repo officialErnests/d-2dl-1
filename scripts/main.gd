@@ -6,7 +6,7 @@ extends Node
 @export var timer: Label
 
 @export var TIME_PER_TASK :=  10000
-@export var TIME_PER_MAIL :=  10000
+@export var TIME_PER_MAIL :=  20000
 
 var write_enabled = false
 # used when the code still needs controll after writing
@@ -321,6 +321,7 @@ func email(p_index: int) -> void:
 		if Diologue.getEmailAmount() == p_index:
 			deaths.endTime = Time.get_ticks_msec()
 			game_over = true
+			timer.stops()
 			console.addSlowText("As you tried that.. nothing happened
 			The bomb stoped ticking
 			The computer buzzed softly..
@@ -330,8 +331,9 @@ func email(p_index: int) -> void:
 			U died XXDD
 			Welp, you did great!
 			You died "+ str(deaths.deaths) + "times
-			And did it in " + str(deaths.start - deaths.endTime) + "ms
-			And whenever you are ready to for another round just type RESET ;PP")
+			And did it in " + str(deaths.endTime - deaths.startTime) + "ms
+			And whenever you are ready to for another round just type RESET ;PP\n")
+			return
 		console.addText(Diologue.getEmail(p_index)["Content"])
 		email_opened = true
 

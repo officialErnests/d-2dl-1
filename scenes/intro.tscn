@@ -124,7 +124,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(2, 0),
-"points": PackedFloat32Array(0, 0, 0, 0.175, -0.16666667, 100, -0.16666667, -16.666668, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.175, -0.16666667, 120, -0.16666667, -16.666668, 0, 0),
 "times": PackedFloat32Array(0, 5.0666666)
 }
 tracks/1/type = "bezier"
@@ -327,11 +327,14 @@ color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="Intro 1/ColorRect"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 249.0
+offset_bottom = 85.0
 text = "All systems operational..
 Core started..
-Wellcome to your life ||\\\\--//||"
+Welcome to the new super personalized super computer
+By noob.corp.c00l"
 
 [node name="Label2" type="Label" parent="Intro 1/ColorRect"]
 modulate = Color(1, 1, 1, 0)
@@ -351,10 +354,10 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 0.00036621094
+offset_bottom = 0.00048828125
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 1, 1)
+color = Color(2.2140146e-06, 0, 0.65653014, 1)
 
 [node name="Label" type="Label" parent="Intro 2/ColorRect"]
 layout_mode = 0
@@ -362,19 +365,23 @@ offset_left = 38.0
 offset_top = 35.0
 offset_right = 198.0
 offset_bottom = 84.0
-text = "Yeah u no more
+text = "CRITICAL ERROR
 X-X"
 label_settings = SubResource("LabelSettings_yjqpq")
 
 [node name="Label2" type="Label" parent="Intro 2/ColorRect"]
 layout_mode = 0
-offset_left = 475.0
-offset_top = 261.0
-offset_right = 602.0
-offset_bottom = 284.0
+offset_left = 396.00003
+offset_top = 286.00003
+offset_right = 626.0
+offset_bottom = 335.00003
 rotation = -6.283
 pivot_offset = Vector2(63.5, 11.5)
-text = "OOPs u dead"
+text = "You have to open the provided
+noob.corp.c00l provided
+motivational package"
+
+[node name="Intro3" type="CanvasLayer" parent="."]
 
 [node name="Game" type="CanvasLayer" parent="."]
 layer = 0

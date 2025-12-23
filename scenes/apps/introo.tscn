@@ -1,4 +1,201 @@
-[gd_scene format=3 uid="uid://bspv8sylvfmfn"]
+[gd_scene load_steps=14 format=3 uid="uid://bspv8sylvfmfn"]
+
+[ext_resource type="Texture2D" uid="uid://bcvngmrdc1jro" path="res://assets/godot.png" id="1_x6o4g"]
+[ext_resource type="Script" uid="uid://hmjqalrwoncl" path="res://scripts/onetime/loader.gd" id="1_yggyt"]
+[ext_resource type="Texture2D" uid="uid://dx1s4nys0bkm8" path="res://assets/inrto.png" id="2_yggyt"]
+[ext_resource type="Texture2D" uid="uid://bsqeo0u7vq7uk" path="res://assets/D2DL1.png" id="4_5w5mu"]
+
+[sub_resource type="Animation" id="Animation_5w5mu"]
+resource_name = "start"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/VBoxContainer/HBoxContainer:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/VBoxContainer/HBoxContainer2:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 68), Vector2(200, 68)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6, 9, 12, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"loadMain"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label2:rotation")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6, 11.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.87266463, -0.37699112]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label2:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(12, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yggyt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/VBoxContainer/HBoxContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/VBoxContainer/HBoxContainer2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 68)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.87266463]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhoa6"]
+_data = {
+&"RESET": SubResource("Animation_yggyt"),
+&"start": SubResource("Animation_5w5mu")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w5mu"]
+texture = ExtResource("1_x6o4g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qhoa6"]
+texture = ExtResource("2_yggyt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dvrk"]
+texture = ExtResource("4_5w5mu")
+modulate_color = Color(0.41568628, 0.654902, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mi5ca"]
+texture = ExtResource("4_5w5mu")
+modulate_color = Color(0.41568628, 0.654902, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ncnj1"]
+texture = ExtResource("4_5w5mu")
+modulate_color = Color(0.41568628, 0.654902, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_chcja"]
+texture = ExtResource("4_5w5mu")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -18,3 +215,131 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qhoa6")
+}
+script = ExtResource("1_yggyt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5w5mu")
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 33
+text = "MADE WITH GODOT"
+
+[node name="Panel2" type="Panel" parent="Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5w5mu")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Control/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qhoa6")
+
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 32
+text = "MADE BY N0O0B090LV"
+
+[node name="Panel2" type="Panel" parent="Control/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qhoa6")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -280.0
+offset_top = -304.0
+offset_right = 507.28168
+offset_bottom = -142.0
+rotation = 0.87266463
+scale = Vector2(2.175, 2.175)
+pivot_offset = Vector2(787.282, 0)
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 118
+theme_override_styles/normal = SubResource("StyleBoxTexture_4dvrk")
+text = "D2DL1"
+
+[node name="Label" type="Label" parent="Label2"]
+layout_mode = 0
+offset_left = 21.063171
+offset_top = 436.8138
+offset_right = 808.34485
+offset_bottom = 598.81384
+rotation = -0.5235988
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 118
+theme_override_styles/normal = SubResource("StyleBoxTexture_mi5ca")
+text = "D2DL1"
+
+[node name="Label" type="Label" parent="Label2/Label"]
+layout_mode = 0
+offset_left = 95.32919
+offset_top = 400.73016
+offset_right = 882.61084
+offset_bottom = 562.73016
+rotation = -0.5235988
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 118
+theme_override_styles/normal = SubResource("StyleBoxTexture_ncnj1")
+text = "D2DL1"
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 68.0
+offset_right = 472.00037
+offset_bottom = 230.0
+rotation = 0.1849057
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 118
+theme_override_styles/normal = SubResource("StyleBoxTexture_chcja")
+text = "D2DL1"
